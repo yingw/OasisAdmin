@@ -14,16 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 public class DynamicController {
     private static final Logger logger = LoggerFactory.getLogger(DynamicController.class);
 
-    @RequestMapping(value = {"/*.html", "/*/*.html", "/*/*/*.html"})
+    @RequestMapping(value = {"/index.html", "/index2.html", "starter.html", "/*/*.html", "/*/*/*.html"})
     public String route(HttpServletRequest request) {
-        logger.info("DynamicController.route: request.getRequestURI() = {}", request.getRequestURI());
+        logger.debug("DynamicController.route: request.getRequestURI() = {}", request.getRequestURI());
         String path = request.getRequestURI();
         return path.substring(0, path.length() - 5); // remove ".html"
     }
 
     @RequestMapping("/")
     public String home() {
-        logger.info("DynamicController.home");
+        logger.debug("DynamicController.home");
         return "redirect:/index.html";
     }
 }

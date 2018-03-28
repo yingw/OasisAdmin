@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout.html}"
+      th:with="menu='user'">
+<!--/*@thymesVar id="user" type="cn.wilmar.lte.model.User"*/-->
+<head>
+  <title th:text="${user['new']} ? '新建用户' : '编辑用户'"></title>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" layout:fragment="content">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        <span th:text="${user['new']} ? '新建用户' : ${user['fullname']}"></span>
+        <small th:text="${user['new']} ? '新建用户' : ${user['username']}"></small>
+      </h1>
+
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="#">信息</a></li>
+        <li class="active">用户</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <!-- Default box -->
+      <div class="box">
+        <div class="box-header with-border">
+          <h3 class="box-title" th:text="${user['new']} ? '新建用户' : '编辑用户'"></h3>
+          <div class="box-tools pull-right">
+            <a href="userList.html" class="btn btn-default btn-sm" th:href="@{/users}">
+              <i class="fa fa-reply"></i> 返回</a>
+          </div>
+        </div>
+
+        <form th:object="${user}" method="post" id="user-form"
+              action="./userDetails.html" th:action="${user['new']} ? '/users/new' : '/users/'+${user.id}+'/edit'"
+              class="form-horizontal">
+
+          <div class="box-body">
+            <div class="col-sm-10 col-sm-push-1">
+              <input type="hidden" name="_method" value="put" th:if="${!user['new']}"/>
+              <fieldset class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">账户名：</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="username" th:field="*{username}" class="form-control"
+                           placeholder="输入用户的账户名称" required="required"/>
+                    <!-- TODO: error message
+                         <span class="help-inline" th:error="*{username}">[error]</span>
+                    -->
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">姓名：</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="fullname" class="form-control" th:field="*{fullname}"
+                           placeholder="输入用户的姓氏" required="required"/>
+                  </div>
+                </div>
+                <div class="form-group"><label class="col-sm-2 control-label">性别：</label>
+                  <div class="col-sm-10">
+                    <div class=" radio radio-info radio-inline">
+                      <input type="radio" name="gender" value="MALE" id="inlineCheckbox1" th:checked="${user.gender?.toString() == 'MALE'}"/>
+                      <label for="inlineCheckbox1"> 男 </label>
+                    </div>
+                    <div class=" radio radio-info radio-inline">
+                      <input type="radio" name="gender" value="FEMALE" id="inlineCheckbox2" th:checked="${user.gender?.toString() == 'FEMALE'}"/>
+                      <label for="inlineCheckbox2"> 女 </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">出生日期：</label>
+                  <div class="col-sm-10">
+                    <div class="input-group date">
+                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                      <input id="user-birthday" type="text" class="form-control"
+                             placeholder="2017-07-16"/>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">电话：</label>
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-phone"></i> </span>
+                      <input type="text" name="phoneNumber" class="form-control" placeholder="..."/>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">E-mail：</label>
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-envelope-open-o"></i> </span>
+                      <input type="text" name="email" class="form-control" placeholder="..." th:field="*{email}"/>
+                    </div>
+                  </div>
+                </div>
+                <!--
+                                  <div class="form-group">
+                                      <label class="col-sm-2 control-label">地址：</label>
+                                      <div class="col-sm-10">
+                                          <div class="input-group">
+                                              <span class="input-group-addon"><i class="fa fa-address-card-o"></i> </span>
+                                              <input type="text" class="form-control" placeholder="..."/>
+                                          </div>
+                                      </div>
+                                  </div>
+                -->
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">启用：</label>
+                  <div class="col-sm-10">
+                    <input type="checkbox" name="active" th:checked="${user.active}" checked="checked"/>
+                  </div>
+                </div>
+                <div class="form-group"><label class="col-sm-2 control-label">描述：</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" placeholder="Write comment..."></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">角色：</label>
+                  <div class="col-sm-10">
+                    <!--/*@thymesVar id="allRoles" type="java.util.List"*/-->
+                    <!--/*@thymesVar id="role" type="cn.wilmar.lte.model.Role"*/-->
+                    <select multiple="multiple" th:field="*{roles}" name="roles" class="form-control">
+                      <option th:each="role : ${allRoles}" th:value="${role.id}" th:text="${role.name}"></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group" th:remove="${user.isNew()} ? all : none">
+                  <label class="col-sm-2 control-label">创建日期：</label>
+                  <div class="col-sm-10">
+                    <input type="text" readonly="readonly" class="form-control" th:value="*{createdDate}"/>
+                  </div>
+                </div>
+                <div class="form-group" th:unless="${user.isNew()}">
+                  <label class="col-sm-2 control-label">更新日期：</label>
+                  <div class="col-sm-10">
+                    <input type="text" readonly="readonly" class="form-control" th:value="*{lastModifiedDate}"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-2"></div>
+                  <div class="col-sm-10"><!--btn btn-w-m btn-primary-->
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
+
+          <div class="box-footer text-right">
+            <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i>
+              <span th:text="${user['new']} ? '保存' : '更新'"> 保存/更新</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+</div>
+<!-- ./wrapper -->
+
+<div layout:fragment="customScript">
+
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+    $(document).ready(function () {
+        $('#user-form').validate({
+            rules: {
+                fullname: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 20
+                },
+                username: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 20
+                },
+//                phoneNumber: {
+//                    number: true
+//                },
+                email: {
+                    email: true
+                }
+            }
+        });
+
+        // Datepicker
+/*
+        $('#user-birthday').datepicker({
+            language: "zh-CN",
+            format: "yyyy-mm-dd",
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true
+        });
+*/
+
+    });
+
+    //        var elem = document.querySelector('.status-switch');
+    //        var init = new Switchery(elem, {size: 'small'});
+    /*]]>*/
+  </script>
+
+</div>
+
+</body>
+</html>

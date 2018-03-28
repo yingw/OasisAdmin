@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout.html}"
+      th:with="menu='user'">
+
+<!--/*@thymesVar id="user" type="cn.wilmar.lte.model.User"*/-->
+<head>
+    <title th:text="|用户 ${user.fullname}|">用户：姓名</title>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper" layout:fragment="content">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                <span th:text="${user.fullname}"></span>
+                <small th:text="${user.username}"></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="#">信息</a></li>
+                <li class="active">用户</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="box">
+
+                <div class="box-header with-border">
+                    <h3 class="box-title">用户详情</h3>
+                    <div class="box-tools pull-right">
+                        <a href="userList.html" class="btn btn-default btn-sm" th:href="@{/users}">
+                            <i class="fa fa-reply"></i> 返回</a>
+                    </div>
+                </div>
+
+                <div class="box-body">
+                    <div class="container">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <th>账户名：</th>
+                                <td th:text="${user.username}">zhangsan</td>
+                            </tr>
+                            <tr>
+                                <th>姓名：</th>
+                                <td th:text="${user.fullname}">张三</td>
+                            </tr>
+                            <tr>
+                                <th>性别：</th>
+                                <td>
+                                    <span th:remove="${user.gender?.toString() == 'MALE'} ? 'none' : 'all' ">男</span>
+                                    <span th:remove="${user.gender?.toString() == 'FEMALE'} ? 'none' : 'all' ">女</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>状态：</th>
+                                <td>
+                                    <i th:class="${user.active} ? 'fa fa-check-circle text-success' : 'fa fa-times-circle text-danger' "
+                                       class="fa fa-times-circle text-danger"></i>
+                                    <div class="pull-right">
+                                        <button th:if="!${user.active}"
+                                                class="btn btn-success btn-xs"
+                                                th:onclick="'if(confirm(\'确定激活 ' + ${user.fullname} + ' ？\')) enableUser(' + ${user.id} + ');'"
+                                                onclick="if(confirm('确定激活 张三 ？')) enableUser('2');">
+                                            <i class="fa fa-check-circle"></i> 激活
+                                        </button>
+                                        <button th:if="${user.active}"
+                                                class="btn btn-danger btn-xs"
+                                                th:onclick="'if(confirm(\'确定禁用 ' + ${user.fullname} + ' ？\')) disableUser(' + ${user.id} + ');'"
+                                                onclick="if(confirm('确定禁用 张三 ？')) disableUser('1');">
+                                            <i class="fa fa-times-circle"></i> 禁用
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>创建日期：</th>
+                                <td th:text="${#temporals.format(user.createdDate,'yyyy-MM-dd HH:mm:ss')}">2019-01-02</td>
+                            </tr>
+                            <tr>
+                                <th>更新日期：</th>
+                                <!--         ${#temporals.format(#temporals.createNow(), 'yyyy')}-->
+                                <td th:text="${#temporals.format(user.lastModifiedDate,'yyyy-MM-dd HH:mm:ss')}">2020-10-23</td>
+                            </tr>
+                            <tr>
+                                <th>角色：</th>
+                                <td>
+                                    <!--<span th:each="role : ${user.roles}" th:text="|${role.name}, |" th:remove="tag"></span>-->
+                                    <!--<span th:text="${#strings.listJoin(user.roles,',')}"></span>-->
+                                    <!--/*@thymesVar id="role" type="cn.wilmar.lte.model.Role"*/-->
+                                    <span th:each="role, iterStat : ${user.roles}" th:text="!${iterStat.last} ? ${role.name} + ', ' : ${role.name}" th:remove="tag"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="box-footer text-right">
+                    <a th:href="@{'/users/'+${user.id}+'/edit'}" href="userForm.html"
+                       class="btn btn-primary"><i class="fa fa-edit"></i>
+                        编辑</a>
+                    <form class="form-inline" style="display:inline-block" role="form"
+                          th:action="@{'/users/'+${user.id}}" action="userList.html"
+                          method="post">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button class="btn btn-danger" type="submit"
+                                th:onclick="'return confirm(\'确定删除 ' + ${user.fullname} + ' ？\')'"
+                                onclick="return confirm('确定删除 张三 ？')"><i class="fa fa-trash-o"></i>
+                            删除
+                        </button>
+                    </form>
+                </div>
+                <!-- /.box-footer-->
+            </div>
+            <!-- /.box -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+</div>
+<!-- ./wrapper -->
+
+<div layout:fragment="customScript">
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        function disableUser(id) {
+            $.ajax({
+                url: "./" + id + "/disable",
+                type: "PUT",
+                async: false,
+                data: {},
+                success: function () {
+                    window.location.reload(true);
+                },
+                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                    alert("发生错误：" + XmlHttpRequest.responseText);
+                }
+            });
+        }
+        function enableUser(id) {
+            $.ajax({
+                url: "./" + id + "/enable",
+                type: "PUT",
+                async: false,
+                data: {},
+                success: function () {
+                    window.location.reload(true);
+                },
+                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                    alert("发生错误：" + XmlHttpRequest.responseText);
+                }
+            });
+        }
+        /*]]>*/
+    </script>
+
+</div>
+
+</body>
+</html>

@@ -23,7 +23,7 @@ public class WilmarLteApplication {
 //        return new LayoutDialect();
 //    }
     public static void main(String[] args) {
-        logger.info("WilmarLteApplication.main");
+        logger.debug("WilmarLteApplication.main");
         SpringApplication.run(WilmarLteApplication.class, args);
     }
 }

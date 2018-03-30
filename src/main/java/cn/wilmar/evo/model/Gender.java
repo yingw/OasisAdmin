@@ -1,4 +1,4 @@
-package cn.wilmar.lte.model;
+package cn.wilmar.evo.model;
 
 import java.util.Arrays;
 import java.util.Collections;

@@ -1,6 +1,6 @@
-package cn.wilmar.lte.repository;
+package cn.wilmar.evo.repository;
 
-import cn.wilmar.lte.model.Role;
+import cn.wilmar.evo.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 

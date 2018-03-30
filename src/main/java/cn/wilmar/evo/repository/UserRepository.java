@@ -1,6 +1,6 @@
-package cn.wilmar.lte.repository;
+package cn.wilmar.evo.repository;
 
-import cn.wilmar.lte.model.User;
+import cn.wilmar.evo.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

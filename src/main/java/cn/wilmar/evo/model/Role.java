@@ -1,4 +1,4 @@
-package cn.wilmar.lte.model;
+package cn.wilmar.evo.model;
 
 import lombok.*;
 
@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
 /**
- * @author yingu on 2017/7/23.
+ * @author yinguowei 2017/7/23.
  */
 @Entity
 @Data

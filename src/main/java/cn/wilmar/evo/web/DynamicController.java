@@ -1,4 +1,4 @@
-package cn.wilmar.lte;
+package cn.wilmar.evo.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +24,6 @@ public class DynamicController {
     @RequestMapping("/")
     public String home() {
         logger.debug("DynamicController.home");
-        return "redirect:/index.html";
+        return "index";
     }
 }

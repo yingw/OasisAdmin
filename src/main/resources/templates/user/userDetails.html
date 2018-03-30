@@ -4,7 +4,7 @@
       layout:decorate="~{/layout/layout.html}"
       th:with="menu='user'">
 
-<!--/*@thymesVar id="user" type="cn.wilmar.lte.model.User"*/-->
+<!--/*@thymesVar id="user" type="cn.wilmar.evo.model.User"*/-->
 <head>
     <title th:text="|用户 ${user.fullname}|">用户：姓名</title>
 </head>
@@ -95,7 +95,7 @@
                                 <td>
                                     <!--<span th:each="role : ${user.roles}" th:text="|${role.name}, |" th:remove="tag"></span>-->
                                     <!--<span th:text="${#strings.listJoin(user.roles,',')}"></span>-->
-                                    <!--/*@thymesVar id="role" type="cn.wilmar.lte.model.Role"*/-->
+                                  <!--/*@thymesVar id="role" type="cn.wilmar.evo.model.Role"*/-->
                                     <span th:each="role, iterStat : ${user.roles}" th:text="!${iterStat.last} ? ${role.name} + ', ' : ${role.name}" th:remove="tag"></span>
                                 </td>
                             </tr>

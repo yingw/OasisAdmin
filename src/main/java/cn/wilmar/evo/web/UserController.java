@@ -1,12 +1,14 @@
-package cn.wilmar.lte;
+package cn.wilmar.evo.web;
 
-import cn.wilmar.lte.model.User;
-import cn.wilmar.lte.repository.RoleRepository;
-import cn.wilmar.lte.repository.UserRepository;
+import cn.wilmar.evo.model.User;
+import cn.wilmar.evo.repository.RoleRepository;
+import cn.wilmar.evo.repository.UserRepository;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -63,6 +65,9 @@ public class UserController {
         return mav;
     }
 
+    @Autowired BCryptPasswordEncoder bCryptPasswordEncoder;
+    private static final String DEFAULT_PASSWORD = "111111";
+
     @ApiOperation(value = "新增保存", notes = "新增用户，并保存入库")
     @PostMapping("/users/new")
     public String createUser(
@@ -72,6 +77,7 @@ public class UserController {
         if (result.hasErrors()) {
             return USER_FORM;
         }
+        user.setPassword(bCryptPasswordEncoder.encode(DEFAULT_PASSWORD));
         userRepository.save(user);
         return "redirect:/users/" + user.getId();
     }

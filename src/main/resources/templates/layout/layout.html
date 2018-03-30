@@ -5,22 +5,34 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">WilmarLTE</title>
+  <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">WilmarEVO</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/dist/css/bootstrap.min.css">
+  <link rel="stylesheet"
+        href="../../static/bower_components/bootstrap/dist/css/bootstrap.min.css"
+        th:href="@{/bower_components/bootstrap/dist/css/bootstrap.min.css}">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet"
+        href="../../static/bower_components/font-awesome/css/font-awesome.min.css"
+        th:href="@{/bower_components/font-awesome/css/font-awesome.min.css}">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="/webjars/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet"
+        href="../../static/bower_components/Ionicons/css/ionicons.min.css"
+        th:href="@{/bower_components/Ionicons/css/ionicons.min.css}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="/css/AdminLTE.min.css">
+  <link rel="stylesheet"
+        href="../../static/css/AdminLTE.min.css"
+        th:href="@{/css/AdminLTE.min.css}">
   <!-- AdminLTE Skins. -->
-  <link rel="stylesheet" href="/css/skins/_all-skins.min.css">
+  <link rel="stylesheet"
+        href="../../static/css/skins/_all-skins.min.css"
+        th:href="@{/css/skins/_all-skins.min.css}">
   <!-- 表格 -->
-  <link rel="stylesheet" href="/webjars/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet"
+        href="../../static/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"
+        th:href="@{/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -30,9 +42,9 @@
   <script src="/plugins/ie9/respond.min.js"></script>
   <![endif]-->
 
-  <!-- Google Font -->
+  <!-- Google Font fonts.googleapis.com changed to fonts.googleapis.cnpmjs.org-->
   <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        href="https://fonts.googleapis.cnpmjs.org/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -43,9 +55,11 @@
     <!-- Logo -->
     <a href="/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>W</b></span>
+      <span class="logo-mini">EVO</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Wilmar</b>LTE</span>
+      <span class="logo-lg">
+        <img src="../../static/img/wilmar-logo-white.png" th:src="@{/img/wilmar-logo-white.png}" style="width: 100px"/>
+        <!--<b>Wilmar</b>-->EVO </span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -73,8 +87,13 @@
           </li>
         </ul>
         <form class="navbar-form navbar-left" role="search">
-          <div class="form-group">
+          <div class="input-group"><!--form-group-->
             <input type="text" class="form-control" id="navbar-search-input" placeholder="全文搜索…">
+            <!--
+                        <span class="input-group-btn">
+                          <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+                        </span>
+            -->
           </div>
         </form>
       </div>
@@ -85,18 +104,20 @@
           <!-- Notifications: style can be found in dropdown.less -->
           <!-- Tasks: style can be found in dropdown.less -->
           <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
+          <li class="dropdown user user-menu" th:if="${#authorization.expression('isAuthenticated()')}">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="/img/yinguowei.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">管理员</span>
+              <img src="../../static/img/yinguowei.jpg" th:src="@{/img/yinguowei.jpg}" class="user-image"
+                   style="border-radius: 10%;" alt="User Image">
+              <span class="hidden-xs" th:text="${session.userFullName}">管理员</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="/img/yinguowei.jpg" class="img-circle" alt="User Image">
+                <img src="../../static/img/yinguowei.jpg" th:src="@{/img/yinguowei.jpg}" class="img-rounded"
+                     alt="User Image">
 
                 <p>
-                  管理员 - 管理员
+                  <span th:text="${session.userFullName}"></span> - <span th:text="${session.userRoleName}"></span>
                   <small>Wilmar ITDS NONSAP TDI</small>
                 </p>
               </li>
@@ -118,10 +139,37 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">个人资料</a>
+                  <a href="#" class="btn btn-default btn-flat">个人中心</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">注销</a>
+                  <form th:action="@{/logout}" method="post">
+                    <!--<a href="/logout" class="btn btn-default btn-flat">注销</a>-->
+                    <input class="btn btn-default btn-flat" type="submit" value="注销">
+                  </form>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown user user-menu" th:if="${#authorization.expression('!isAuthenticated()')}">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              未登入 <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="../../static/img/unknown-user.png" th:src="@{/img/unknown-user.png}" class="img-rounded"
+                     alt="User Image">
+
+                <p>
+                  未登入
+                  <small>登入或注册</small>
+                </p>
+              </li>
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a th:href="@{/login}" class="btn btn-default btn-flat">登入</a>
+                </div>
+                <div class="pull-right">
+                  <a th:href="@{/register}" class="btn btn-default btn-flat">注册</a>
                 </div>
               </li>
             </ul>
@@ -136,62 +184,108 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="../../static/img/yinguowei.jpg" class="img-rounded" th:src="@{/img/yinguowei.jpg}" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p th:text="${session.userFullName}">Alexander Pierce</p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
       <!-- search form -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="搜索菜单…">
           <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
+            <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i
+                  class="fa fa-search"></i></button>
+          </span>
         </div>
       </form>
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">导航</li>
+        <li class="header"> 导航</li>
 
         <li th:classappend="${menu=='home' ? 'active' : ''}">
-          <a href="/"><i class="fa fa-book"></i> <span>首页</span></a></li>
+          <a href="/"><i class="fa fa-book"></i> 首页</a></li>
 
         <!-- 权限中心 -->
-        <li class="treeview" th:classappend="${menu=='user' ? 'active' : ''}">
+        <li class="treeview"
+            th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+            th:classappend="${menu=='user' ? 'active' : ''}">
           <a href="#">
-            <i class="fa fa-user"></i> <span>权限中心</span>
+            <i class="fa fa-user"></i> 权限中心
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li th:classappend="${menu=='user' ? 'active' : ''}"><a href="/users"><i class="fa fa-circle-o"></i>
-              用户管理</a></li>
-            <li th:classappend="${menu=='index2' ? 'active' : ''}"><a href="/index2.html"><i class="fa fa-circle-o"></i>
-              部门管理</a></li>
+            <li th:classappend="${menu=='user' ? 'active' : ''}">
+              <a href="#" th:href="@{/users}">
+                <i class="fa fa-circle-o"></i> 用户管理</a></li>
+            <li th:classappend="${menu=='index2' ? 'active' : ''}">
+              <a href="#"><i class="fa fa-circle-o"></i> 部门管理</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 角色管理</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> 资源管理</a></li>
+          </ul>
+        </li>
+        <!-- 系统设置 for admin -->
+        <li class="treeview"
+            th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
+            th:classappend="${menu=='settings' ? 'active' : ''}">
+          <a href="#"><i class="fa fa-adjust"></i> <span>系统设置</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li th:classappend="${submenu=='syssettings' ? 'active' : ''}">
+              <a href="settings/sysSettings.html" th:href="@{/settings/sys}">
+                <i class="fa fa-wrench"></i> 系统设置</a></li>
+            <li th:classappend="${submenu=='tokens' ? 'active' : ''}">
+              <a href="settings/sysSettings.html" th:href="@{/tokens}">
+                <i class="fa fa-pie-chart"></i> 用户Session</a></li>
+            <li th:classappend="${submenu=='charts' ? 'active' : ''}">
+              <a href="settings/sysSettings.html" th:href="@{/settings/sys}">
+                <i class="fa fa-pie-chart"></i> 登入日志</a></li>
+            <li th:classappend="${submenu=='charts' ? 'active' : ''}">
+              <a href="settings/sysSettings.html" th:href="@{/settings/sys}">
+                <i class="fa fa-pie-chart"></i> 统计</a></li>
           </ul>
         </li>
 
         <!-- 工具 -->
         <li class="treeview">
-          <a href="#"><i class="fa fa-gear"></i> <span>管理工具</span>
+          <a href="#"><i class="fa fa-gear"></i> 管理工具
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#" target="_blank">
-              <i class="fa fa-database"></i><span>H2 Console</span>
+            <li><a href="#" th:href="@{/h2-console}" target="_blank">
+              <i class="fa fa-database"></i> H2 Console
               <span class="pull-right-container"><i class="fa fa-external-link"></i></span>
             </a></li>
-            <li><a href="#" target="_blank">
-              <i class="fa fa-file-text-o"></i> <span>Actuator Docs</span>
+            <li><a href="#" th:href="@{/docs}" target="_blank">
+              <i class="fa fa-file-text-o"></i> Actuator Docs
               <span class="pull-right-container"><i class="fa fa-external-link"></i></span>
             </a></li>
-            <li><a href="#" target="_blank">
-              <i class="fa fa-book"></i> <span>HAL Browser</span>
+            <li><a href="#" th:href="@{/swagger-ui.html}" target="_blank">
+              <i class="fa fa-file-text-o"></i> Swagger Docs
               <span class="pull-right-container"><i class="fa fa-external-link"></i></span>
             </a></li>
-            <li><a href="#" target="_blank">
-              <i class="fa fa-sliders"></i> <span>Boot Admin</span>
+            <li><a href="#" th:href="@{/management}" target="_blank">
+              <i class="fa fa-book"></i> HAL Browser
+              <span class="pull-right-container"><i class="fa fa-external-link"></i></span>
+            </a></li>
+            <li><a href="#" th:href="@{/admin}" target="_blank">
+              <i class="fa fa-sliders"></i> Boot Admin
+              <span class="pull-right-container"><i class="fa fa-external-link"></i></span>
+            </a></li>
+            <li><a href="#" th:href="@{/druid}" target="_blank">
+              <i class="fa fa-sliders"></i> Druid
               <span class="pull-right-container"><i class="fa fa-external-link"></i></span>
             </a></li>
           </ul>
@@ -426,7 +520,7 @@
     <div class="pull-right hidden-xs">
       <b>版本</b> 1.0.0
     </div>
-    <strong><a href="https://lte.wilmar.cn">WilmarLTE &copy;</a> 2017-2018 <a
+    <strong><a href="https://evo.wilmar.cn">WilmarEVO &copy;</a> 2017-2018 <a
           href="https://www.wilmar.cn">益海嘉里</a></strong>
   </footer>
 
@@ -449,27 +543,45 @@
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="/webjars/jquery/3.3.1/dist/jquery.min.js"></script>
+<script
+      src="../../static/bower_components/jquery/dist/jquery.min.js"
+      th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="/webjars/bootstrap/3.3.7/dist/js/bootstrap.min.js"></script>
+<script
+      src="../../static/bower_components/bootstrap/dist/js/bootstrap.min.js"
+      th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
 <!-- AdminLTE App -->
-<script src="/js/adminlte.min.js"></script>
+<script
+      src="../../static/js/adminlte.min.js"
+      th:src="@{/js/adminlte.min.js}"></script>
 
 <!-- Optionally -->
 <!-- Slimscroll -->
-<script src="/webjars/jQuery-slimScroll/1.3.8/jquery.slimscroll.min.js"></script>
+<script
+      src="../../static/bower_components/jQuery-slimScroll/jquery.slimscroll.min.js"
+      th:src="@{/bower_components/jQuery-slimScroll/jquery.slimscroll.min.js}"></script>
 <!-- FastClick -->
-<script src="/webjars/fastclick/1.0.6/lib/fastclick.js"></script>
+<script
+      src="../../static/bower_components/fastclick/lib/fastclick.js"
+      th:src="@{/bower_components/fastclick/lib/fastclick.js}"></script>
 <!-- AdminLTE for demo purposes -->
 <!--<script src="/js/demo.js"></script>-->
 
 <!-- DataTables -->
-<script src="/webjars/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="/webjars/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script
+      src="../../static/bower_components/datatables.net/js/jquery.dataTables.min.js"
+      th:src="@{/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script
+      src="../../static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"
+      th:src="@{/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
 
 <!-- jQuery Validation -->
-<script src="/webjars/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="/webjars/jquery-validation/src/localization/messages_zh.js" charset="UTF-8"></script>
+<script
+      src="../../static/bower_components/jquery-validation/dist/jquery.validate.min.js"
+      th:src="@{/bower_components/jquery-validation/dist/jquery.validate.min.js}"></script>
+<script
+      src="../../static/bower_components/jquery-validation/src/localization/messages_zh.js"
+      th:src="@{/bower_components/jquery-validation/src/localization/messages_zh.js}" charset="UTF-8"></script>
 
 <div layout:fragment="customScript" th:remove="tag">
 

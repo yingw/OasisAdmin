@@ -1,4 +1,4 @@
-package cn.wilmar.lte.model;
+package cn.wilmar.evo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

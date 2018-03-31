@@ -60,7 +60,9 @@
     "jquery-ui": "1.11.4",
     "jquery-validation": "^1.17.0",
     "datatables-plugins": "^1.10.15",
-    "iCheck": "^1.0.2"
+    "iCheck": "^1.0.2",
+    "html5shiv": "^3.7.3",
+    "respond": "Respond#^1.4.2"
   },
   "resolutions": {
     "jquery": "^3.2.1"

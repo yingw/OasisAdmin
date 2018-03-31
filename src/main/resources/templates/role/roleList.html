@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout.html}"
-      th:with="menu='examples', subMenu='blank'">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout/layout}"
+      th:with="menu='security', submenu='roles'">
 <head>
-  <title>Blank Page</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 2 | Blank Page</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body>
 <!-- Site wrapper -->
 <div class="wrapper">
+  <!-- =============================================== -->
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" layout:fragment="content">
@@ -43,6 +48,19 @@
         </div>
         <div class="box-body">
           Start creating your amazing application!
+          <div id="feedback"></div>
+          <table id="role_table" class="table table-bordered table-hover">
+            <thead>
+            <tr>
+              <th>id</th>
+              <th>名称</th>
+              <th>key</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
@@ -56,17 +74,16 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
 </div>
 <!-- ./wrapper -->
 
 <div layout:fragment="customScript">
-<script>
-  $(document).ready(function () {
-    $('.sidebar-menu').tree()
-  })
-</script>
+  <script src="js/role.js"></script>
+  <script>
+    $(document).ready(function () {
+        ajax_search_submit();
+    })
+  </script>
 </div>
-
 </body>
 </html>

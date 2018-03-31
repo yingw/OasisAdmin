@@ -29,17 +29,26 @@
   <link rel="stylesheet"
         href="../../static/css/skins/_all-skins.min.css"
         th:href="@{/css/skins/_all-skins.min.css}">
+  <!-- Wilmar Skin -->
+  <link rel="stylesheet"
+        href="../../static/css/skins/skin-wilmar.css"
+        th:href="@{/css/skins/skin-wilmar.css}">
   <!-- 表格 -->
   <link rel="stylesheet"
         href="../../static/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"
         th:href="@{/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
-
+  <!-- PACE -->
+  <link rel="stylesheet"
+        href="../../static/bower_components/PACE/themes/blue/pace-theme-minimal.css"
+        th:href="@{/bower_components/PACE/themes/blue/pace-theme-minimal.css}">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
-  <script src="/plugins/ie9/html5shiv.min.js"></script>
-  <script src="/plugins/ie9/respond.min.js"></script>
+  <script src="../../static/bower_components/html5shiv/dist/html5shiv-printshiv.min.js"
+          th:src="@{/bower_components/html5shiv/dist/html5shiv-printshiv.min.js}"></script>
+  <script src="../../static/bower_components/respond/dest/respond.min.js"
+          th:src="@{/bower_components/respond/dest/respond.min.js}"></script>
   <![endif]-->
 
   <!-- Google Font fonts.googleapis.com changed to fonts.googleapis.cnpmjs.org-->
@@ -47,7 +56,7 @@
         href="https://fonts.googleapis.cnpmjs.org/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-wilmar sidebar-mini" th:class="'hold-transition skin-wilmar sidebar-mini'">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -181,6 +190,9 @@
   </header>
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
+    <!-- 如果要外部引入 menu -->
+    <!--<div th:remove="tag" th:include="menu">边栏菜单</div>-->
+
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
@@ -209,14 +221,14 @@
         <li class="header"> 导航</li>
 
         <li th:classappend="${menu=='home' ? 'active' : ''}">
-          <a href="/"><i class="fa fa-book"></i> 首页</a></li>
+          <a href="/"><i class="fa fa-book"></i> <span>首页</span></a></li>
 
         <!-- 权限中心 -->
         <li class="treeview"
             th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
             th:classappend="${menu=='user' ? 'active' : ''}">
           <a href="#">
-            <i class="fa fa-user"></i> 权限中心
+            <i class="fa fa-user"></i> <span>权限中心</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -227,8 +239,10 @@
                 <i class="fa fa-circle-o"></i> 用户管理</a></li>
             <li th:classappend="${menu=='index2' ? 'active' : ''}">
               <a href="#"><i class="fa fa-circle-o"></i> 部门管理</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> 角色管理</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> 资源管理</a></li>
+            <li th:classappend="${submenu=='roles' ? 'active' : ''}">
+              <a href="#" th:href="@{/role}"><i class="fa fa-circle-o"></i> 角色管理</a></li>
+            <li th:classappend="${submenu=='resources' ? 'active' : ''}">
+              <a href="#"><i class="fa fa-circle-o"></i> 资源管理</a></li>
           </ul>
         </li>
         <!-- 系统设置 for admin -->
@@ -258,7 +272,7 @@
 
         <!-- 工具 -->
         <li class="treeview">
-          <a href="#"><i class="fa fa-gear"></i> 管理工具
+          <a href="#"><i class="fa fa-gear"></i> <span>管理工具</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -582,7 +596,9 @@
 <script
       src="../../static/bower_components/jquery-validation/src/localization/messages_zh.js"
       th:src="@{/bower_components/jquery-validation/src/localization/messages_zh.js}" charset="UTF-8"></script>
-
+<script
+      src="../../static/bower_components/PACE/pace.min.js"
+      th:src="@{/bower_components/PACE/pace.min.js}"></script>
 <div layout:fragment="customScript" th:remove="tag">
 
 </div>

@@ -19,7 +19,7 @@ public class Role {
     @Id @GeneratedValue
     Long id;
 
-    @NotEmpty @NonNull @Column(unique = true)
+    @NotEmpty @NonNull @Column(unique = true, name = "role_key")
     String key;
 
     @NotEmpty @NonNull @Column(unique = true)

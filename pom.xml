@@ -234,6 +234,7 @@
                             <goal>bower</goal>
                         </goals>
                         <configuration>
+                            <arguments>install --allow-root</arguments>
                             <bowerInheritsProxyConfigFromMaven>false</bowerInheritsProxyConfigFromMaven>
                         </configuration>
                     </execution>

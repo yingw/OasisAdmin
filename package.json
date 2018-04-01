@@ -1,9 +1,13 @@
 {
-  "name": "wilmar-evo",
+  "name": "Oasis Admin",
   "version": "1.0.0",
-  "description": "",
+  "description": "Oasis Admin application",
   "dependencies": {
     "bower": "~1.8.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yingw/OasisAdmin.git"
   },
   "author": "yinguowei",
   "license": "MIT"

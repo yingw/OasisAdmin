@@ -1,0 +1,21 @@
+package cn.yinguowei.oasis.config;
+
+import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+/**
+ * @author yinguowei on 2017/7/19.
+ */
+public class WmErrorController implements ErrorController {
+    private static final String ERROR_PATH = "/error";
+
+    @RequestMapping(ERROR_PATH)
+    public String handleError() {
+        return "pages/examples/404";
+    }
+
+    @Override
+    public String getErrorPath() {
+        return ERROR_PATH;
+    }
+}

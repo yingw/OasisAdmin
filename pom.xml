@@ -154,6 +154,7 @@
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!-- TODO: set in Profile to ignore -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -223,12 +224,18 @@
                         <goals>
                             <goal>npm</goal>
                         </goals>
+                        <configuration>
+                            <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>bower install</id>
                         <goals>
                             <goal>bower</goal>
                         </goals>
+                        <configuration>
+                            <bowerInheritsProxyConfigFromMaven>false</bowerInheritsProxyConfigFromMaven>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

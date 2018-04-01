@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/layout.html}"
       th:with="menu='user'">
-<!--/*@thymesVar id="user" type="cn.wilmar.evo.model.User"*/-->
+<!--/*@thymesVar id="user" type="cn.yinguowei.oasis.model.User"*/-->
 <head>
   <title th:text="${user['new']} ? '新建用户' : '编辑用户'"></title>
 </head>
@@ -130,7 +130,7 @@
                   <label class="col-sm-2 control-label">角色：</label>
                   <div class="col-sm-10">
                     <!--/*@thymesVar id="allRoles" type="java.util.List"*/-->
-                    <!--/*@thymesVar id="role" type="cn.wilmar.evo.model.Role"*/-->
+                    <!--/*@thymesVar id="role" type="cn.yinguowei.oasis.model.Role"*/-->
                     <select multiple="multiple" th:field="*{roles}" name="roles" class="form-control">
                       <option th:each="role : ${allRoles}" th:value="${role.id}" th:text="${role.name}"></option>
                     </select>

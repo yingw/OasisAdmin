@@ -15,5 +15,5 @@
 		<appender-ref ref="STDOUT" />
 	</root>
 
-	<logger name="cn.wilmar.evo" level="ALL" />
+	<logger name="cn.yinguowei.oasis" level="ALL" />
 </configuration>

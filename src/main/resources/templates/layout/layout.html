@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">OasisAdmin</title>
+  <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">WilmarAdmin</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -52,8 +52,11 @@
   <![endif]-->
 
   <!-- Google Font fonts.googleapis.com changed to fonts.googleapis.cnpmjs.org-->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.cnpmjs.org/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <!--<link rel="stylesheet"-->
+        <!--href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">-->
+  <!--<script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>-->
+  <!--<script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>-->
+
 </head>
 
 <body class="hold-transition skin-green sidebar-mini" th:class="'hold-transition skin-green sidebar-mini'">
@@ -64,11 +67,11 @@
     <!-- Logo -->
     <a href="/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><i class="fa fa-paper-plane"></i></span>
+      <span class="logo-mini"><b>W</b></i></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg">
         <!--<img src="../../static/img/wilmar-logo-white.png" th:src="@{/img/wilmar-logo-white.png}" style="width: 100px"/>-->
-        <i class="fa fa-paper-plane"></i> <b>Oasis</b>Admin </span>
+        <i class="fa fa-paper-plane"></i> <b>Wilmar</b>Admin </span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -85,7 +88,7 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">下拉菜单 <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#">菜单</a></li>
+              <li><a th:href="@{/users}">用户管理</a></li>
               <li><a href="#">菜单</a></li>
               <li><a href="#">长菜单</a></li>
               <li class="divider"></li>
@@ -226,7 +229,7 @@
         <!-- 权限中心 -->
         <li class="treeview"
             th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"
-            th:classappend="${menu=='user' ? 'active' : ''}">
+            th:classappend="${menu=='security' ? 'active' : ''}">
           <a href="#">
             <i class="fa fa-user"></i> <span>权限中心</span>
             <span class="pull-right-container">
@@ -234,13 +237,13 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li th:classappend="${menu=='user' ? 'active' : ''}">
+            <li th:classappend="${submenu=='user' ? 'active' : ''}">
               <a href="#" th:href="@{/users}">
                 <i class="fa fa-circle-o"></i> 用户管理</a></li>
             <li th:classappend="${menu=='index2' ? 'active' : ''}">
               <a href="#"><i class="fa fa-circle-o"></i> 部门管理</a></li>
-            <li th:classappend="${submenu=='roles' ? 'active' : ''}">
-              <a href="#" th:href="@{/role}"><i class="fa fa-circle-o"></i> 角色管理</a></li>
+            <li th:classappend="${submenu=='role' ? 'active' : ''}">
+              <a href="#" th:href="@{/roles}"><i class="fa fa-circle-o"></i> 角色管理</a></li>
             <li th:classappend="${submenu=='resources' ? 'active' : ''}">
               <a href="#"><i class="fa fa-circle-o"></i> 资源管理</a></li>
           </ul>
@@ -255,16 +258,16 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li th:classappend="${submenu=='syssettings' ? 'active' : ''}">
+            <li th:classappend="${submenu=='basis' ? 'active' : ''}">
               <a href="settings/sysSettings.html" th:href="@{/settings/sys}">
-                <i class="fa fa-wrench"></i> 系统设置</a></li>
-            <li th:classappend="${submenu=='tokens' ? 'active' : ''}">
+                <i class="fa fa-wrench"></i> 基础设置</a></li>
+            <li th:classappend="${submenu=='token' ? 'active' : ''}">
               <a href="settings/sysSettings.html" th:href="@{/tokens}">
                 <i class="fa fa-pie-chart"></i> 用户Session</a></li>
-            <li th:classappend="${submenu=='charts' ? 'active' : ''}">
+            <li th:classappend="${submenu=='log' ? 'active' : ''}">
               <a href="settings/sysSettings.html" th:href="@{/settings/sys}">
                 <i class="fa fa-pie-chart"></i> 登入日志</a></li>
-            <li th:classappend="${submenu=='charts' ? 'active' : ''}">
+            <li th:classappend="${submenu=='statistics' ? 'active' : ''}">
               <a href="settings/sysSettings.html" th:href="@{/settings/sys}">
                 <i class="fa fa-pie-chart"></i> 统计</a></li>
           </ul>
@@ -305,199 +308,20 @@
           </ul>
         </li>
 
-        <!--
-        <li class="treeview" th:classappend="${menu=='index' || menu=='index2' ? 'active' : ''}">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li th:classappend="${menu=='index' ? 'active' : ''}"><a href="/index.html"><i class="fa fa-circle-o"></i>
-              Dashboard v1</a></li>
-            <li th:classappend="${menu=='index2' ? 'active' : ''}"><a href="/index2.html"><i class="fa fa-circle-o"></i>
-              Dashboard v2</a></li>
-          </ul>
-        </li>
+        <!-- 示例 -->
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Layout Options</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
+            <i class="fa fa-gbp"></i> <span>实例</span>
+            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href="/pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href="/pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="/pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
+            <li><a href="#" th:href="@{/example}">
+              <i class="fa fa-history"></i> Example</a> </li>
+            <li><a href="#" th:href="@{/ztree}">
+              <i class="fa fa-history"></i> Ztree</a> </li>
           </ul>
         </li>
-        <li th:classappend="${menu=='widgets' ? 'active' : ''}">
-          <a href="/pages/widgets.html">
-            <i class="fa fa-th"></i> <span>Widgets</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
-            </span>
-          </a>
-        </li>
-        <li class="treeview" th:classappend="${menu=='charts' ? 'active' : ''}">
-          <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Charts</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li th:classappend="${subMenu=='chartjs' ? 'active' : ''}"><a href="/pages/charts/chartjs.html"><i
-                  class="fa fa-circle-o"></i> ChartJS</a></li>
-            <li th:classappend="${subMenu=='morris' ? 'active' : ''}"><a href="/pages/charts/morris.html"><i
-                  class="fa fa-circle-o"></i> Morris</a></li>
-            <li th:classappend="${subMenu=='flot' ? 'active' : ''}"><a href="/pages/charts/flot.html"><i
-                  class="fa fa-circle-o"></i> Flot</a></li>
-            <li th:classappend="${subMenu=='inline' ? 'active' : ''}"><a href="/pages/charts/inline.html"><i
-                  class="fa fa-circle-o"></i> Inline charts</a></li>
-          </ul>
-        </li>
-        <li class="treeview" th:classappend="${menu=='ui' ? 'active' : ''}">
-          <a href="#">
-            <i class="fa fa-laptop"></i>
-            <span>UI Elements</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li th:classappend="${subMenu=='general' ? 'active' : ''}"><a href="/pages/UI/general.html"><i
-                  class="fa fa-circle-o"></i> General</a></li>
-            <li th:classappend="${subMenu=='icons' ? 'active' : ''}"><a href="/pages/UI/icons.html"><i
-                  class="fa fa-circle-o"></i> Icons</a></li>
-            <li th:classappend="${subMenu=='buttons' ? 'active' : ''}"><a href="/pages/UI/buttons.html"><i
-                  class="fa fa-circle-o"></i> Buttons</a></li>
-            <li th:classappend="${subMenu=='sliders' ? 'active' : ''}"><a href="/pages/UI/sliders.html"><i
-                  class="fa fa-circle-o"></i> Sliders</a></li>
-            <li th:classappend="${subMenu=='timeline' ? 'active' : ''}"><a href="/pages/UI/timeline.html"><i
-                  class="fa fa-circle-o"></i> Timeline</a></li>
-            <li th:classappend="${subMenu=='modals' ? 'active' : ''}"><a href="/pages/UI/modals.html"><i
-                  class="fa fa-circle-o"></i> Modals</a></li>
-          </ul>
-        </li>
-        <li class="treeview" th:classappend="${menu=='forms' ? 'active' : ''}">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Forms</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li th:classappend="${subMenu=='general' ? 'active' : ''}"><a href="/pages/forms/general.html"><i
-                  class="fa fa-circle-o"></i> General Elements</a></li>
-            <li th:classappend="${subMenu=='advanced' ? 'active' : ''}"><a href="/pages/forms/advanced.html"><i
-                  class="fa fa-circle-o"></i> Advanced Elements</a></li>
-            <li th:classappend="${subMenu=='editors' ? 'active' : ''}"><a href="/pages/forms/editors.html"><i
-                  class="fa fa-circle-o"></i> Editors</a></li>
-          </ul>
-        </li>
-        <li class="treeview" th:classappend="${menu=='tables' ? 'active' : ''}">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>Tables</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li th:classappend="${subMenu=='simple' ? 'active' : ''}"><a href="/pages/tables/simple.html"><i
-                  class="fa fa-circle-o"></i> Simple tables</a></li>
-            <li th:classappend="${subMenu=='data' ? 'active' : ''}"><a href="/pages/tables/data.html"><i
-                  class="fa fa-circle-o"></i> Data tables</a></li>
-          </ul>
-        </li>
-        <li th:classappend="${menu=='calendar' ? 'active' : ''}">
-          <a href="/pages/calendar.html">
-            <i class="fa fa-calendar"></i> <span>Calendar</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-red">3</small>
-              <small class="label pull-right bg-blue">17</small>
-            </span>
-          </a>
-        </li>
-        <li>
-          <a href="/pages/mailbox/mailbox.html">
-            <i class="fa fa-envelope"></i> <span>Mailbox</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
-            </span>
-          </a>
-        </li>
-        <li class="treeview" th:classappend="${menu=='examples' ? 'active' : ''}">
-          <a href="#">
-            <i class="fa fa-folder"></i> <span>Examples</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li th:classappend="${subMenu=='invoice' ? 'active' : ''}"><a href="/pages/examples/invoice.html"><i
-                  class="fa fa-circle-o"></i> Invoice</a></li>
-            <li th:classappend="${subMenu=='profile' ? 'active' : ''}"><a href="/pages/examples/profile.html"><i
-                  class="fa fa-circle-o"></i> Profile</a></li>
-            <li><a href="/pages/examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
-            <li><a href="/pages/examples/register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-            <li><a href="/pages/examples/lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-            <li th:classappend="${subMenu=='404' ? 'active' : ''}"><a href="/pages/examples/404.html"><i
-                  class="fa fa-circle-o"></i> 404 Error</a></li>
-            <li th:classappend="${subMenu=='500' ? 'active' : ''}"><a href="/pages/examples/500.html"><i
-                  class="fa fa-circle-o"></i> 500 Error</a></li>
-            <li th:classappend="${subMenu=='blank' ? 'active' : ''}"><a href="/pages/examples/blank.html"><i
-                  class="fa fa-circle-o"></i> Blank Page</a></li>
-            <li th:classappend="${subMenu=='pace' ? 'active' : ''}"><a href="/pages/examples/pace.html"><i
-                  class="fa fa-circle-o"></i> Pace Page</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-share"></i> <span>Multilevel</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-            <li class="treeview">
-              <a href="#"><i class="fa fa-circle-o"></i> Level One
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                <li class="treeview">
-                  <a href="#"><i class="fa fa-circle-o"></i> Level Two
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-          </ul>
-        </li>
-        <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-        <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-        -->
+
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -534,8 +358,8 @@
     <div class="pull-right hidden-xs">
       <b>版本</b> 1.0.0
     </div>
-    <strong><a href="https://oasis.yinguowei.cn">OasisAdmin &copy;</a> 2017-2018 <a
-          href="https://www.oasis.cn">OASIS</a></strong>
+    <strong><a href="https://admin.wilamr.cn">Wilmar Admin &copy;</a> 2017-2018 <a
+          href="https://www.wilmar.cn">Wilmar</a></strong>
   </footer>
 
 <!--  <footer>
@@ -607,6 +431,15 @@
 <script
       src="../../static/bower_components/PACE/pace.min.js"
       th:src="@{/bower_components/PACE/pace.min.js}"></script>
+
+<script>
+
+/*    $youziku.load("body", "3291b04973ce47efa3ab4a555a5b5916", "Source-Han-Light");
+    /!*$youziku.load("#id1,.class1,h1", "3291b04973ce47efa3ab4a555a5b5916", "Source-Han-Light");*!/
+    /!*．．．*!/
+    $youziku.draw();*/
+</script>
+
 <div layout:fragment="customScript" th:remove="tag">
 
 </div>

@@ -4,13 +4,40 @@
       layout:decorate="~{layout/layout.html}"
       th:with="menu='user'">
 
-<!--/*@thymesVar id="user" type="cn.yinguowei.oasis.model.User"*/-->
+<!--/*@thymesVar id="user" type="cn.wilmar.admin.model.User"*/-->
 <head>
+    <meta charset="utf-8" th:remove="all">
     <title th:text="|用户 ${user.fullname}|">用户：姓名</title>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" th:remove="all">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="../../static/bower_components/bootstrap/dist/css/bootstrap.min.css" th:remove="all">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="../../static/bower_components/font-awesome/css/font-awesome.min.css" th:remove="all">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="../../static/bower_components/Ionicons/css/ionicons.min.css" th:remove="all">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="../../static/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" th:remove="all">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="../../static/css/AdminLTE.min.css" th:remove="all">
+
+    <link rel="stylesheet" href="../../static/css/skins/_all-skins.min.css" th:remove="all">
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="#" class="logo"></a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button 缩进菜单的按钮 -->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"></a>
+        </nav>
+    </header>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" layout:fragment="content">
@@ -95,8 +122,8 @@
                                 <td>
                                     <!--<span th:each="role : ${user.roles}" th:text="|${role.name}, |" th:remove="tag"></span>-->
                                     <!--<span th:text="${#strings.listJoin(user.roles,',')}"></span>-->
-                                  <!--/*@thymesVar id="role" type="cn.yinguowei.oasis.model.Role"*/-->
-                                    <span th:each="role, iterStat : ${user.roles}" th:text="!${iterStat.last} ? ${role.name} + ', ' : ${role.name}" th:remove="tag"></span>
+                                    <!--/*@thymesVar id="role" type="cn.wilmar.admin.model.Role"*/-->
+                                    <span th:each="role, iterStat : ${user.roles}" th:text="!${iterStat.last} ? (${role.name} + ', ') : ${role.name}" th:remove="tag"></span>
                                 </td>
                             </tr>
                             </tbody>
@@ -130,6 +157,22 @@
 
 </div>
 <!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="../../static/bower_components/jquery/dist/jquery.min.js" th:remove="all"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../../static/bower_components/bootstrap/dist/js/bootstrap.min.js" th:remove="all"></script>
+<!-- DataTables -->
+<script src="../../static/bower_components/datatables.net/js/jquery.dataTables.min.js" th:remove="all"></script>
+<script src="../../static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js" th:remove="all"></script>
+<!-- SlimScroll -->
+<script src="../../static/bower_components/jquery-slimscroll/jquery.slimscroll.min.js" th:remove="all"></script>
+<!-- FastClick -->
+<script src="../../static/bower_components/fastclick/lib/fastclick.js" th:remove="all"></script>
+<!-- AdminLTE App -->
+<script src="../../static/js/adminlte.min.js" th:remove="all"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../static/js/demo.js" th:remove="all"></script>
 
 <div layout:fragment="customScript">
 

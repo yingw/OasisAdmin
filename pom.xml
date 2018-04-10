@@ -4,17 +4,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.wilmar</groupId>
-    <artifactId>wilmar-evo</artifactId>
+    <artifactId>wilmar-admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>WilmarEVO</name>
+    <name>WilmarAdmin</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.0.RELEASE</version>
+        <version>2.0.1.RELEASE</version>
         <relativePath/> <!-- lookup parent fuserRepositorytory -->
     </parent>
 
@@ -27,47 +27,92 @@
         <!--<spring-boot-admin.version>2.0.0-SNAPSHOT</spring-boot-admin.version>-->
         <spring-boot-admin.version>1.5.7</spring-boot-admin.version>
         <frontend-maven-plugin.version>1.6</frontend-maven-plugin.version>
+        <!-- Or you can choose your installed version -->
         <node.version>v8.10.0</node.version>
         <npm.version>5.6.0</npm.version>
     </properties>
-<!--
-    <project>
-        <repositories>
-            <repository>
+    <!--
+        <project>
+            <repositories>
+                <repository>
 
-            </repository>
-        </repositories>
-        <dependencies>
-            <dependency>
+                </repository>
+            </repositories>
+            <dependencies>
+                <dependency>
 
-            </dependency>
-        </dependencies>
-    </project>
--->
+                </dependency>
+            </dependencies>
+        </project>
+    -->
 
     <dependencies>
+
+        <!-- Ecache 2.x -->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
+
+        <!-- ECache 3.x -->
+<!--
+        <dependency>
+            <groupId>org.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+        </dependency>
+-->
+
+        <!-- Redis -->
+<!--
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+-->
+
+        <!-- hazelcast -->
+<!--
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.hazelcast</groupId>
+            <artifactId>hazelcast-spring</artifactId>
+        </dependency>
+-->
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.6.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
-<!--
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-server</artifactId>
-            <version>${spring-boot-admin.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>${spring-boot-admin.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-server-ui</artifactId>
-            <version>${spring-boot-admin.version}</version>
-        </dependency>
--->
+        <!--
+                <dependency>
+                    <groupId>de.codecentric</groupId>
+                    <artifactId>spring-boot-admin-server</artifactId>
+                    <version>${spring-boot-admin.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>de.codecentric</groupId>
+                    <artifactId>spring-boot-admin-starter-client</artifactId>
+                    <version>${spring-boot-admin.version}</version>
+                </dependency>
+                <dependency>
+                    <groupId>de.codecentric</groupId>
+                    <artifactId>spring-boot-admin-server-ui</artifactId>
+                    <version>${spring-boot-admin.version}</version>
+                </dependency>
+        -->
 
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
@@ -82,12 +127,12 @@
             <version>2.3.0</version>
         </dependency>
 
-<!--
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>jquery-icheck</artifactId>
-            <version>1.0.1</version>
-        </dependency>-->
+        <!--
+                <dependency>
+                    <groupId>org.webjars.bower</groupId>
+                    <artifactId>jquery-icheck</artifactId>
+                    <version>1.0.1</version>
+                </dependency>-->
         <!-- swagger -->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -108,10 +153,10 @@
         </dependency>
         <!-- actuator doc? -->
 
-        <!--<dependency>-->
-        <!--<groupId>org.springframework.boot</groupId>-->
-        <!--<artifactId>spring-boot-starter-cache</artifactId>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
 
         <!-- Swagger UI, not supported yet -->
         <!--
@@ -180,21 +225,21 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-<!--
+    <!--
 
-    <repositories>
-        <repository>
-            <id>ali</id>
-            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-        </repository>
-        &lt;!&ndash; UReport snapshot 版本用，使用正式版时候建议去掉https://oss.sonatype.org/content/repositories/snapshots/ &ndash;&gt;
-        <repository>
-            <id>sonatype</id>
-            <url>https://oss.sonatype.org/content/groups/public/</url>
-            <snapshots></snapshots>
-        </repository>
-    </repositories>
--->
+        <repositories>
+            <repository>
+                <id>ali</id>
+                <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            </repository>
+            &lt;!&ndash; UReport snapshot 版本用，使用正式版时候建议去掉https://oss.sonatype.org/content/repositories/snapshots/ &ndash;&gt;
+            <repository>
+                <id>sonatype</id>
+                <url>https://oss.sonatype.org/content/groups/public/</url>
+                <snapshots></snapshots>
+            </repository>
+        </repositories>
+    -->
 
     <build>
         <plugins>
@@ -215,6 +260,7 @@
                         <configuration>
                             <nodeVersion>${node.version}</nodeVersion>
                             <npmVersion>${npm.version}</npmVersion>
+                            <!-- if you don't need to download from these 3rd party registry, comments these -->
                             <nodeDownloadRoot>https://npm.taobao.org/mirrors/node/</nodeDownloadRoot>
                             <npmDownloadRoot>https://registry.npm.taobao.org/npm/-/</npmDownloadRoot>
                         </configuration>
@@ -234,7 +280,6 @@
                             <goal>bower</goal>
                         </goals>
                         <configuration>
-                            <arguments>install --allow-root</arguments>
                             <bowerInheritsProxyConfigFromMaven>false</bowerInheritsProxyConfigFromMaven>
                         </configuration>
                     </execution>
@@ -242,6 +287,7 @@
             </plugin>
         </plugins>
     </build>
+
 
 
 </project>

@@ -3,13 +3,48 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/layout.html}"
       th:with="menu='user'">
-<!--/*@thymesVar id="user" type="cn.yinguowei.oasis.model.User"*/-->
+<!--/*@thymesVar id="user" type="cn.wilmar.admin.model.User"*/-->
 <head>
+  <meta charset="utf-8" th:remove="all">
+
   <title th:text="${user['new']} ? '新建用户' : '编辑用户'"></title>
+
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" th:remove="all">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="../../static/bower_components/bootstrap/dist/css/bootstrap.min.css" th:remove="all">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../static/bower_components/font-awesome/css/font-awesome.min.css" th:remove="all">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="../../static/bower_components/Ionicons/css/ionicons.min.css" th:remove="all">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="../../static/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" th:remove="all">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../static/css/AdminLTE.min.css" th:remove="all">
+
+  <link rel="stylesheet" href="../../static/css/skins/_all-skins.min.css" th:remove="all">
+
+  <link rel="stylesheet"
+        href="../../static/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"
+        th:href="@{/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css}">
+
+  <link rel="stylesheet" href="../../static/bower_components/switchery/dist/switchery.min.css"
+        th:href="@{/bower_components/switchery/dist/switchery.min.css}"/>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
+
+  <!-- Main Header -->
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="#" class="logo"></a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button 缩进菜单的按钮 -->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"></a>
+    </nav>
+  </header>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper" layout:fragment="content">
@@ -118,7 +153,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">启用：</label>
                   <div class="col-sm-10">
-                    <input type="checkbox" name="active" th:checked="${user.active}" checked="checked"/>
+                    <input type="checkbox" name="active" id="active" th:checked="${user.active}" checked="checked"/>
                   </div>
                 </div>
                 <div class="form-group"><label class="col-sm-2 control-label">描述：</label>
@@ -126,16 +161,15 @@
                     <textarea class="form-control" placeholder="Write comment..."></textarea>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">角色：</label>
+<!--                <div clasRole     <label class="col-sm-2 control-label">角色：</label>
                   <div class="col-sm-10">
-                    <!--/*@thymesVar id="allRoles" type="java.util.List"*/-->
-                    <!--/*@thymesVar id="role" type="cn.yinguowei.oasis.model.Role"*/-->
+                    &lt;!&ndash;/*@thymesVar id="allRoles" type="java.util.List"*/&ndash;&gt;
+                    &lt;!&ndash;/*@thymesVar id="role" type="cn.wilmar.admin.model.Role"*/&ndash;&gt;
                     <select multiple="multiple" th:field="*{roles}" name="roles" class="form-control">
                       <option th:each="role : ${allRoles}" th:value="${role.id}" th:text="${role.name}"></option>
                     </select>
                   </div>
-                </div>
+                </div>-->
                 <div class="form-group" th:remove="${user.isNew()} ? all : none">
                   <label class="col-sm-2 control-label">创建日期：</label>
                   <div class="col-sm-10">
@@ -173,11 +207,53 @@
 </div>
 <!-- ./wrapper -->
 
+<!-- jQuery 3 -->
+<script src="../../static/bower_components/jquery/dist/jquery.min.js" th:remove="all"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../../static/bower_components/bootstrap/dist/js/bootstrap.min.js" th:remove="all"></script>
+<!-- DataTables -->
+<script src="../../static/bower_components/datatables.net/js/jquery.dataTables.min.js" th:remove="all"></script>
+<script src="../../static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js" th:remove="all"></script>
+<!-- SlimScroll -->
+<script src="../../static/bower_components/jquery-slimscroll/jquery.slimscroll.min.js" th:remove="all"></script>
+<!-- FastClick -->
+<script src="../../static/bower_components/fastclick/lib/fastclick.js" th:remove="all"></script>
+<!-- AdminLTE App -->
+<script src="../../static/js/adminlte.min.js" th:remove="all"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../static/js/demo.js" th:remove="all"></script>
+
+
+
 <div layout:fragment="customScript">
+
+  <!-- Date Picker-->
+  <script src="../../static/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"
+          th:src="@{/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js}"></script>
+  <script src="../../static/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-CN.min.js"
+          th:src="@{/bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-CN.min.js}"></script>
+
+  <!-- Switchery -->
+  <script src="../../static/bower_components/switchery/dist/switchery.min.js"
+          th:src="@{/bower_components/switchery/dist/switchery.min.js}"></script>
 
   <script th:inline="javascript">
     /*<![CDATA[*/
     $(document).ready(function () {
+
+        var elem = document.getElementById('active');
+        var init = new Switchery(elem, { size: 'small' });
+
+        //Date picker
+        $('#user-birthday').datepicker({
+            format: "yyyy-mm-dd",
+            todayBtn: "linked",
+            language: "zh-CN",
+            autoclose: true,
+            todayHighlight: true,
+            orientation: "bottom auto"
+        });
+
         $('#user-form').validate({
             rules: {
                 fullname: {

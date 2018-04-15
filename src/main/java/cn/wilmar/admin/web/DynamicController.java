@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 public class DynamicController {
     private static final Logger logger = LoggerFactory.getLogger(DynamicController.class);
 
-    @RequestMapping(value = {"/index.html", "/index2.html", "starter.html", "/*/*.html", "/*/*/*.html"})
+    @RequestMapping(value = {"/index.html", "/index2.html", "/welcome_iframe.html", "starter.html", "/*/*.html", "/*/*/*.html"})
     public String route(HttpServletRequest request) {
         logger.debug("DynamicController.route: request.getRequestURI() = {}", request.getRequestURI());
         String path = request.getRequestURI();
@@ -24,6 +24,7 @@ public class DynamicController {
     @RequestMapping("/")
     public String home() {
         logger.debug("DynamicController.home");
-        return "index";
+//        return "index";
+        return "index_iframe";
     }
 }

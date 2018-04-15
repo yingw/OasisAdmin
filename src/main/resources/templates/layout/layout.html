@@ -24,7 +24,7 @@
   <!-- Theme style -->
   <link rel="stylesheet"
         href="../../static/css/AdminLTE.min.css"
-        th:href="@{/css/AdminLTE.min.css}">
+        th:href="@{/css/AdminLTE.css}">
   <!-- AdminLTE Skins. -->
   <link rel="stylesheet"
         href="../../static/css/skins/_all-skins.min.css"
@@ -59,7 +59,7 @@
 
 </head>
 
-<body class="hold-transition skin-green sidebar-mini" th:class="'hold-transition skin-green sidebar-mini'">
+<body class="hold-transition skin-wilmar sidebar-mini" th:class="'hold-transition skin-wilmar sidebar-mini'">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -67,11 +67,11 @@
     <!-- Logo -->
     <a href="/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>W</b></i></span>
+      <span class="logo-mini"><i class="fa fa-wikipedia-w"></i> </i></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg">
         <!--<img src="../../static/img/wilmar-logo-white.png" th:src="@{/img/wilmar-logo-white.png}" style="width: 100px"/>-->
-        <i class="fa fa-paper-plane"></i> <b>Wilmar</b>Admin </span>
+        <b>Wilmar</b> Admin </span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -238,12 +238,13 @@
           </a>
           <ul class="treeview-menu">
             <li th:classappend="${submenu=='user' ? 'active' : ''}">
-              <a href="#" th:href="@{/users}">
+              <a href="#" onclick="addTabs({id:'90011',title: '用户管理',close: true,url: './users',urlType: 'relative'});">
                 <i class="fa fa-circle-o"></i> 用户管理</a></li>
             <li th:classappend="${menu=='index2' ? 'active' : ''}">
               <a href="#"><i class="fa fa-circle-o"></i> 部门管理</a></li>
             <li th:classappend="${submenu=='role' ? 'active' : ''}">
-              <a href="#" th:href="@{/roles}"><i class="fa fa-circle-o"></i> 角色管理</a></li>
+              <a href="#" onclick="addTabs({id:'90012',title: '角色管理',close: true,url: './roles',urlType: 'relative'});">
+                <i class="fa fa-circle-o"></i> 角色管理</a></li>
             <li th:classappend="${submenu=='resources' ? 'active' : ''}">
               <a href="#"><i class="fa fa-circle-o"></i> 资源管理</a></li>
           </ul>
@@ -281,10 +282,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#" th:href="@{/h2-console}" target="_blank">
-              <i class="fa fa-database"></i> H2 Console
-              <span class="pull-right-container"><i class="fa fa-external-link"></i></span>
-            </a></li>
+            <li>
+              <a href="#" onclick="addTabs({id:'90031',title: 'H2 Console',close: true,url: './h2-console',urlType: 'relative'});">
+              <i class="fa fa-database"></i> H2 Console</a></li>
             <li><a href="#" th:href="@{/docs}" target="_blank">
               <i class="fa fa-file-text-o"></i> Actuator Docs
               <span class="pull-right-container"><i class="fa fa-external-link"></i></span>
@@ -399,7 +399,7 @@
 <!-- AdminLTE App -->
 <script
       src="../../static/js/adminlte.min.js"
-      th:src="@{/js/adminlte.min.js}"></script>
+      th:src="@{/js/adminlte.js}"></script>
 
 <!-- Optionally -->
 <!-- Slimscroll -->

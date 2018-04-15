@@ -4,6 +4,14 @@
            maxEntriesLocalHeap="200"
            timeToLiveSeconds="600">
     </cache>
+    <cache name="userByLogin"
+           maxEntriesLocalHeap="200"
+           timeToLiveSeconds="600">
+    </cache>
+    <cache name="userById"
+           maxEntriesLocalHeap="200"
+           timeToLiveSeconds="600">
+    </cache>
 
     <cache name="examples"
            maxEntriesLocalHeap="200"

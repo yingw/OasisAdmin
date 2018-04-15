@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout.html}"
+      layout:decorate="~{layout/layout_iframe}"
       th:with="menu='examples', subMenu='blank'">
 <head>
   <meta charset="utf-8" th:remove="all">
@@ -45,7 +45,7 @@
   </header>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" layout:fragment="content">
+  <div layout:fragment="content">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -147,8 +147,8 @@
 
       $.ajax({
           type: "POST",
-//              ${ctx}
-          url: "[[${ctx}]]/roles/[[${role.id}]]/tree",
+//              ${ctx}  [[${ctx}]]
+          url: "/roles/[[${role.id}]]/tree",
           dataType: 'json',
           success: function (msg) {
 //              alert(msg);

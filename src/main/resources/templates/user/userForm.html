@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout.html}"
+      layout:decorate="~{layout/layout_iframe}"
       th:with="menu='user'">
 <!--/*@thymesVar id="user" type="cn.wilmar.admin.model.User"*/-->
 <head>
@@ -47,7 +47,7 @@
   </header>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" layout:fragment="content">
+  <div layout:fragment="content">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -69,8 +69,6 @@
         <div class="box-header with-border">
           <h3 class="box-title" th:text="${user['new']} ? '新建用户' : '编辑用户'"></h3>
           <div class="box-tools pull-right">
-            <a href="userList.html" class="btn btn-default btn-sm" th:href="@{/users}">
-              <i class="fa fa-reply"></i> 返回</a>
           </div>
         </div>
 
@@ -187,15 +185,22 @@
                   <div class="col-sm-10"><!--btn btn-w-m btn-primary-->
                   </div>
                 </div>
+
               </fieldset>
             </div>
           </div>
 
 
-          <div class="box-footer text-right">
-            <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i>
-              <span th:text="${user['new']} ? '保存' : '更新'"> 保存/更新</span>
-            </button>
+          <div class="box-footer">
+            <div class="col-sm-6">
+              <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i>
+                <span th:text="${user['new']} ? '保存' : '更新'"> 保存/更新</span>
+              </button>
+            </div>
+            <div class="col-sm-6 text-right">
+              <a href="userList.html" class="btn btn-default btn-sm" th:href="@{/users}">
+                <i class="fa fa-reply"></i> 返回</a>
+            </div>
           </div>
         </form>
       </div>

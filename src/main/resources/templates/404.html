@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout.html}"
+      layout:decorate="~{layout/layout_iframe}"
       th:with="menu='examples', subMenu='404'">
 <head>
   <meta charset="utf-8">
@@ -35,7 +35,7 @@
 <div class="wrapper">
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" layout:fragment="content">
+  <div layout:fragment="content">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>

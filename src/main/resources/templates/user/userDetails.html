@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout.html}"
+      layout:decorate="~{layout/layout_iframe}"
       th:with="menu='user'">
 
 <!--/*@thymesVar id="user" type="cn.wilmar.admin.model.User"*/-->
@@ -40,7 +40,7 @@
     </header>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" layout:fragment="content">
+    <div layout:fragment="content">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
@@ -63,8 +63,6 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">用户详情</h3>
                     <div class="box-tools pull-right">
-                        <a href="userList.html" class="btn btn-default btn-sm" th:href="@{/users}">
-                            <i class="fa fa-reply"></i> 返回</a>
                     </div>
                 </div>
 
@@ -131,20 +129,26 @@
                     </div>
                 </div>
 
-                <div class="box-footer text-right">
-                    <a th:href="@{'/users/'+${user.id}+'/edit'}" href="userForm.html"
-                       class="btn btn-primary"><i class="fa fa-edit"></i>
-                        编辑</a>
-                    <form class="form-inline" style="display:inline-block" role="form"
-                          th:action="@{'/users/'+${user.id}}" action="userList.html"
-                          method="post">
-                        <input type="hidden" name="_method" value="delete"/>
-                        <button class="btn btn-danger" type="submit"
-                                th:onclick="'return confirm(\'确定删除 ' + ${user.fullname} + ' ？\')'"
-                                onclick="return confirm('确定删除 张三 ？')"><i class="fa fa-trash-o"></i>
-                            删除
-                        </button>
-                    </form>
+                <div class="box-footer">
+                    <div class="col-sm-6">
+                        <a th:href="@{'/users/'+${user.id}+'/edit'}" href="userForm.html" class="btn btn-primary">
+                            <i class="fa fa-edit"></i> 编辑</a>
+                        <form class="form-inline" style="display:inline-block" role="form"
+                              th:action="@{'/users/'+${user.id}}" action="userList.html"
+                              method="post">
+                            <input type="hidden" name="_method" value="delete"/>
+                            <button class="btn btn-danger" type="submit"
+                                    th:onclick="'return confirm(\'确定删除 ' + ${user.fullname} + ' ？\')'"
+                                    onclick="return confirm('确定删除 张三 ？')"><i class="fa fa-trash-o"></i>
+                                删除
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="col-sm-6 text-right">
+                        <a href="userList.html" class="btn btn-default btn-sm" th:href="@{/users}">
+                            <i class="fa fa-reply"></i> 返回</a>
+                    </div>
                 </div>
                 <!-- /.box-footer-->
             </div>

@@ -126,7 +126,7 @@ public class UserController {
         u.setUsername(user.getUsername());
         u.setFullname(user.getFullname());
         u.setEmail(user.getEmail());
-        u.setRoles(user.getRoles());
+//        u.setRoles(user.getRoles());
         u.setActive(user.getActive());
         u.setGender(user.getGender());
 //        userRepository.save(u);
@@ -175,9 +175,7 @@ public class UserController {
     }
 
     private void setUserStatus(@PathVariable("id") Long id, boolean active) {
-        User user = userRepository.findById(id).get();
-        user.setActive(active);
-        userRepository.save(user);
+        userService.setUserStatus(id, active);
     }
 
     @GetMapping("/users/{id}/grant")

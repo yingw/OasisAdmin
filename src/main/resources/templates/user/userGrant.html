@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout.html}"
+      layout:decorate="~{layout/layout_iframe}"
       th:with="menu='examples', subMenu='blank'">
 <!--/*@thymesVar id="user" type="cn.wilmar.admin.model.User"*/-->
 <head>
@@ -44,7 +44,7 @@
   </header>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" layout:fragment="content">
+  <div layout:fragment="content">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -91,8 +91,14 @@
           </form>
         </div>
         <!-- /.box-body -->
-        <div class="box-footer text-right">
-          <button class="btn btn-primary" type="button" id="btn-submit"><i class="fa fa-save"></i> 保存</button>
+        <div class="box-footer">
+          <div class="col-sm-6">
+            <button class="btn btn-primary" type="button" id="btn-submit"><i class="fa fa-save"></i> 保存</button>
+          </div>
+          <div class="col-sm-6 text-right">
+          <!--<div class="">-->
+            <a class="btn btn-default" th:href="@{/users}"><i class="fa fa-reply"></i> 取消</a>
+          </div>
         </div>
         <!-- /.box-footer-->
       </div>

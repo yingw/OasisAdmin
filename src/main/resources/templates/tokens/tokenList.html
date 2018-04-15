@@ -74,14 +74,6 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">用户Session</h3>
                     <div class="box-tools pull-right">
-                        <form th:action="@{/tokens}" method="post">
-                            <input type="hidden" name="_method" value="delete">
-                            <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('确定要删除所有用户session吗？');">
-                                <i class="fa fa-trash-o"></i> 删除所有
-                            </button>
-                        </form>
-                        </a>
                     </div>
                 </div>
 
@@ -133,7 +125,13 @@
                 </div>
 
                 <div class="box-footer">
-                    Box页脚
+                    <form th:action="@{/tokens}" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <button type="submit" class="btn btn-danger btn-sm"
+                                onclick="return confirm('确定要删除所有用户session吗？');">
+                            <i class="fa fa-trash-o"></i> 删除所有
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>

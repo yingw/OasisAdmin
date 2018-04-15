@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
-      layout:decorate="~{layout/layout}"
+      layout:decorate="~{layout/layout_iframe}"
       th:with="menu='security', submenu='role'">
 <head>
   <meta charset="utf-8">
@@ -45,7 +45,7 @@
   <!-- =============================================== -->
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" layout:fragment="content">
+  <div layout:fragment="content">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>角色管理
@@ -67,8 +67,6 @@
           <h3 class="box-title">角色列表</h3>
 
           <div class="box-tools pull-right">
-            <a th:href="@{/roles/new}" class="btn btn-success btn-sm">
-              <i class="fa fa-plus"></i> 新增角色</a>
           </div>
         </div>
         <div class="box-body">
@@ -116,7 +114,8 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-          Footer
+          <a th:href="@{/roles/new}" class="btn btn-success btn-sm">
+            <i class="fa fa-plus"></i> 新增角色</a>
         </div>
         <!-- /.box-footer-->
       </div>

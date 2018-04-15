@@ -11,13 +11,14 @@ var App = function () {
 
     var resizeHandlers = [];
 
-    var basePath = '../content/superui/';
+    // var basePath = '../content/superui/';
+    var basePath = './';
 
-    var globalImgPath = 'global/img/';
+    var globalImgPath = 'static/img/';
 
     var globalPluginsPath = 'base/plugins/';
 
-    var globalCssPath = 'global/css/';
+    var globalCssPath = 'css/';
 
     // theme layout color set
 
@@ -296,9 +297,9 @@ var App = function () {
             return;
         }
         var test = $("input[type=checkbox]:not(.toggle, .md-check, .md-radiobtn, .make-switch, .icheck), input[type=radio]:not(.toggle, .md-check, .md-radiobtn, .star, .make-switch, .icheck)");
-        if (test.size() > 0) {
+        if (test.length > 0) {
             test.each(function () {
-                if ($(this).parents(".checker").size() === 0) {
+                if ($(this).parents(".checker").length === 0) {
                     $(this).show();
                     $(this).uniform();
                 }
@@ -456,9 +457,9 @@ var App = function () {
     var handleModals = function () {
         // fix stackable modal issue: when 2 or more modals opened, closing one of modal will remove .modal-open class. 
         $('body').on('hide.bs.modal', function () {
-            if ($('.modal:visible').size() > 1 && $('html').hasClass('modal-open') === false) {
+            if ($('.modal:visible').length > 1 && $('html').hasClass('modal-open') === false) {
                 $('html').addClass('modal-open');
-            } else if ($('.modal:visible').size() <= 1) {
+            } else if ($('.modal:visible').length <= 1) {
                 $('html').removeClass('modal-open');
             }
         });
@@ -580,7 +581,7 @@ var App = function () {
             return;
         }
 
-        if ($(".fancybox-button").size() > 0) {
+        if ($(".fancybox-button").length > 0) {
             $(".fancybox-button").fancybox({
                 groupAttr: 'data-rel',
                 prevEffect: 'none',
@@ -781,7 +782,7 @@ var App = function () {
 
         // wrApper function to scroll(focus) to an element
         scrollTo: function (el, offeset) {
-            var pos = (el && el.size() > 0) ? el.offset().top : 0;
+            var pos = (el && el.length > 0) ? el.offset().top : 0;
 
             if (el) {
                 if ($('body').hasClass('page-header-fixed')) {
@@ -981,12 +982,12 @@ var App = function () {
             }
 
             if (!options.container) {
-                if ($('.page-fixed-main-content').size() === 1) {
+                if ($('.page-fixed-main-content').length === 1) {
                     $('.page-fixed-main-content').prepend(html);
-                } else if (($('body').hasClass("page-container-bg-solid") || $('body').hasClass("page-content-white")) && $('.page-head').size() === 0) {
+                } else if (($('body').hasClass("page-container-bg-solid") || $('body').hasClass("page-content-white")) && $('.page-head').length === 0) {
                     $('.page-title').after(html);
                 } else {
-                    if ($('.page-bar').size() > 0) {
+                    if ($('.page-bar').length > 0) {
                         $('.page-bar').after(html);
                     } else {
                         $('.page-breadcrumb, .breadcrumbs').after(html);
@@ -1017,7 +1018,7 @@ var App = function () {
         initUniform: function (els) {
             if (els) {
                 $(els).each(function () {
-                    if ($(this).parents(".checker").size() === 0) {
+                    if ($(this).parents(".checker").length === 0) {
                         $(this).show();
                         $(this).uniform();
                     }
@@ -1122,6 +1123,9 @@ var App = function () {
         },
 
         getGlobalImgPath: function () {
+            // alert("basePath = "+basePath);
+            // alert("globalImgPath = "+globalImgPath);
+            // alert(basePath + globalImgPath);
             return basePath + globalImgPath;
         },
 
@@ -1906,7 +1910,7 @@ function getActivePageId() {
 }
 
 function canRemoveTab(pageId) {
-    return findTabTitle(pageId).find('.fa-remove').size() > 0;
+    return findTabTitle(pageId).find('.fa-remove').length > 0;
 }
 
 //添加tab
@@ -1921,7 +1925,8 @@ var addTabs = function (options) {
 
     if (options.urlType === "relative") {
         // var url = window.location.protocol + '//' + window.location.host + "/";
-        var basePath = window.location.pathname + "/../";
+        // var basePath = window.location.pathname + "/../";
+        var basePath = window.location.pathname;
         options.url = basePath + options.url;
     }
 
@@ -1935,7 +1940,8 @@ var addTabs = function (options) {
 
         var $title = $('<a href="javascript:void(0);"></a>').attr(pageIdField, pageId).addClass("menu_tab");
 
-        var $text = $("<span class='page_tab_title'></span>").text(options.title).appendTo($title);
+        // 和后面的关闭按钮间加了个空格 - yinguowei
+        var $text = $("<span class='page_tab_title'></span>").text(options.title + ' ').appendTo($title);
         // title += '<span class="page_tab_title">' + options.title + '</span>';
 
         //是否允许关闭
@@ -1967,7 +1973,8 @@ var addTabs = function (options) {
             //frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="yes"  allowtransparency="yes"
 
             //iframe 加载完成事件
-            $iframe.load(function () {
+            // $iframe.load(function () {
+            $iframe.on('load', function () {
                 App.unblockUI('#tab-content');//解锁界面
                 App.fixIframeCotent();//修正高度
             });
@@ -2008,7 +2015,7 @@ function closeTabByPageId(pageId) {
         //优先传递给后面的tab,没有的话就传递给前一个
         var $nextTitle = $title.next();
         var activePageId;
-        if ($nextTitle.size() > 0) {
+        if ($nextTitle.length > 0) {
             activePageId = getPageId($nextTitle);
         } else {
             activePageId = getPageId($title.prev());
@@ -2424,16 +2431,18 @@ $(function () {
         }
 
         //另外绑定菜单被点击事件,做其它动作
-        $menu_ul.on("click", "li.treeview a", function () {
+/*        $menu_ul.on("click", "li.treeview a", function () {
             var $a = $(this);
-
-            if ($a.next().size() == 0) {//如果size>0,就认为它是可以展开的
+            // alert($a.next());
+            // alert($a.next().length);
+            if ($a.next().length == 0) {//如果size>0,就认为它是可以展开的
                 if ($(window).width() < $.AdminLTE.options.screenSizes.sm) {//小屏幕
                     //触发左边菜单栏按钮点击事件,关闭菜单栏
+                    // alert("what?");
                     $($.AdminLTE.options.sidebarToggleSelector).click();
                 }
             }
-        });
+        });*/
     };
 
     $.fn.sidebarMenu.defaults = {

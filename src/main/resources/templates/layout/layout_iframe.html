@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">WilmarAdmin</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet"
+        href="../../static/bower_components/bootstrap/dist/css/bootstrap.min.css"
+        th:href="@{/bower_components/bootstrap/dist/css/bootstrap.min.css}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="../../static/bower_components/font-awesome/css/font-awesome.min.css"
+        th:href="@{/bower_components/font-awesome/css/font-awesome.min.css}">
+  <!-- Ionicons -->
+  <link rel="stylesheet"
+        href="../../static/bower_components/Ionicons/css/ionicons.min.css"
+        th:href="@{/bower_components/Ionicons/css/ionicons.min.css}">
+  <!-- Theme style -->
+  <link rel="stylesheet"
+        href="../../static/css/AdminLTE.min.css"
+        th:href="@{/css/AdminLTE.css}">
+  <!-- AdminLTE Skins. -->
+  <link rel="stylesheet"
+        href="../../static/css/skins/_all-skins.min.css"
+        th:href="@{/css/skins/_all-skins.min.css}">
+  <!-- Wilmar Skin -->
+  <link rel="stylesheet"
+        href="../../static/css/skins/skin-wilmar.css"
+        th:href="@{/css/skins/skin-wilmar.css}">
+  <!-- 表格 -->
+  <link rel="stylesheet"
+        href="../../static/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css"
+        th:href="@{/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css}">
+  <!-- PACE -->
+  <link rel="stylesheet"
+        href="../../static/bower_components/PACE/themes/blue/pace-theme-minimal.css"
+        th:href="@{/bower_components/PACE/themes/blue/pace-theme-minimal.css}">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="../../static/bower_components/html5shiv/dist/html5shiv-printshiv.min.js"
+          th:src="@{/bower_components/html5shiv/dist/html5shiv-printshiv.min.js}"></script>
+  <script src="../../static/bower_components/respond/dest/respond.min.js"
+          th:src="@{/bower_components/respond/dest/respond.min.js}"></script>
+  <![endif]-->
+
+  <!-- Google Font fonts.googleapis.com changed to fonts.googleapis.cnpmjs.org-->
+  <!--<link rel="stylesheet"-->
+        <!--href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">-->
+  <!--<script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>-->
+  <!--<script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>-->
+
+</head>
+
+<body class="hold-transition skin-wilmar sidebar-mini" th:class="'hold-transition skin-wilmar sidebar-mini'" style="background-color: #ecf0f5;">
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div layout:fragment="content">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Page Header
+        <small>Optional description</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+
+      <!--------------------------
+        | Your Page Content Here |
+        -------------------------->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+<!--  <footer>
+    <div th:replace="fragments/footer :: footer">&copy; 2016 blog.codeleak.pl</div>
+  </footer>
+
+  in footer.html <div th:fragment="footer">
+  -->
+
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+<!-- jQuery 3 -->
+<script
+      src="../../static/bower_components/jquery/dist/jquery.min.js"
+      th:src="@{/bower_components/jquery/dist/jquery.min.js}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script
+      src="../../static/bower_components/bootstrap/dist/js/bootstrap.min.js"
+      th:src="@{/bower_components/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- AdminLTE App -->
+<script
+      src="../../static/js/adminlte.min.js"
+      th:src="@{/js/adminlte.js}"></script>
+
+<!-- Optionally -->
+<!-- Slimscroll -->
+<script
+      src="../../static/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"
+      th:src="@{/bower_components/jquery-slimscroll/jquery.slimscroll.min.js}"></script>
+<!-- FastClick -->
+<script
+      src="../../static/bower_components/fastclick/lib/fastclick.js"
+      th:src="@{/bower_components/fastclick/lib/fastclick.js}"></script>
+<!-- AdminLTE for demo purposes -->
+<!--<script src="/js/demo.js"></script>-->
+
+<!-- DataTables -->
+<script
+      src="../../static/bower_components/datatables.net/js/jquery.dataTables.min.js"
+      th:src="@{/bower_components/datatables.net/js/jquery.dataTables.min.js}"></script>
+<script
+      src="../../static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"
+      th:src="@{/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js}"></script>
+
+<!-- jQuery Validation -->
+<script
+      src="../../static/bower_components/jquery-validation/dist/jquery.validate.min.js"
+      th:src="@{/bower_components/jquery-validation/dist/jquery.validate.min.js}"></script>
+<script
+      src="../../static/bower_components/jquery-validation/src/localization/messages_zh.js"
+      th:src="@{/bower_components/jquery-validation/src/localization/messages_zh.js}" charset="UTF-8"></script>
+<script
+      src="../../static/bower_components/PACE/pace.min.js"
+      th:src="@{/bower_components/PACE/pace.min.js}"></script>
+
+<script>
+
+/*    $youziku.load("body", "3291b04973ce47efa3ab4a555a5b5916", "Source-Han-Light");
+    /!*$youziku.load("#id1,.class1,h1", "3291b04973ce47efa3ab4a555a5b5916", "Source-Han-Light");*!/
+    /!*．．．*!/
+    $youziku.draw();*/
+</script>
+
+<div layout:fragment="customScript" th:remove="tag">
+
+</div>
+
+</body>
+</html>

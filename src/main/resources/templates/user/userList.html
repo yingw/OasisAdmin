@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout.html}"
+      layout:decorate="~{layout/layout_iframe.html}"
       th:with="menu='security', submenu='user'">
 <head>
   <meta charset="utf-8" th:remove="all">
@@ -43,7 +43,7 @@
   </header>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper" layout:fragment="content">
+  <div layout:fragment="content">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>用户管理
@@ -65,8 +65,6 @@
         <div class="box-header with-border">
           <h3 class="box-title">用户列表</h3>
           <div class="box-tools pull-right">
-            <a href="userForm.html" th:href="@{/users/new}" class="btn btn-success btn-sm">
-              <i class="fa fa-plus"></i> 新增用户</a>
           </div>
         </div>
 
@@ -107,7 +105,7 @@
               <td th:text="${#temporals.format(user.createdDate,'yyyy-MM-dd')}">2018-04-01</td>
               <td th:text="${#temporals.format(user.lastModifiedDate,'yyyy-MM-dd')}">2018-04-01</td>
               <td>
-                <span th:remove="tag" th:each="role, iter : ${user.roles}" th:text="!${iter.last} ? (${role.name}+',') : ${role.name}"></span>
+                <span th:remove="tag" th:each="role, iter : ${user.roles}" th:text="!${iter.last} ? (${role.name}+', ') : ${role.name}"></span>
               </td>
               <td class="text-right">
                 <a class="btn btn-primary btn-sm" th:href="@{'/users/' + ${user.id}}">
@@ -128,7 +126,9 @@
 
         <!-- /.box-body -->
         <div class="box-footer">
-          Footer
+
+          <a href="userForm.html" th:href="@{/users/new}" class="btn btn-success btn-sm">
+            <i class="fa fa-plus"></i> 新增用户</a>
         </div>
         <!-- /.box-footer-->
       </div>

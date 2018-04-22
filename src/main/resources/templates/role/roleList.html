@@ -45,7 +45,7 @@
   <!-- =============================================== -->
 
   <!-- Content Wrapper. Contains page content -->
-  <div layout:fragment="content">
+  <div class="content-wrapper" layout:fragment="content">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>角色管理
@@ -75,8 +75,8 @@
             <thead>
             <tr>
               <th>#</th>
-              <th>标识</th>
               <th>名称</th>
+              <th>标识</th>
               <th>类型</th>
               <th>描述</th>
               <th>用户数</th>
@@ -88,8 +88,8 @@
             <!--/*@thymesVar id="roles" type="java.util.List"*/-->
             <tr th:each="role : ${roles}">
               <td th:text="${role.id}">1</td>
-              <td th:text="${role.key}">Admin</td>
               <td th:text="${role.name}">管理员</td>
+              <td th:text="${role.key}">Admin</td>
               <td>
                 <span class="label label-default" th:if="${role.type.toString() == 'SYSTEM'}">系统角色</span>
                 <span class="label label-success" th:if="${role.type.toString() == 'CUSTOM'}">自定义角色</span>
@@ -116,6 +116,8 @@
         <div class="box-footer">
           <a th:href="@{/roles/new}" class="btn btn-success btn-sm">
             <i class="fa fa-plus"></i> 新增角色</a>
+          <!-- 由于在 iframe 里，如果需要跳转模块需要调用 parent 的方法 -->
+          <!--<a href="#" onclick="parent.addTabs({id:'90011',title: '用户管理',close: true,url: './users',urlType: 'relative'});"> Test Jume </a>-->
         </div>
         <!-- /.box-footer-->
       </div>

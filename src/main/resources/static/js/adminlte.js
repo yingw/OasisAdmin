@@ -1040,23 +1040,20 @@ throw new Error('AdminLTE requires jQuery')
     var treeviewMenu = link.next(Selector.treeviewMenu);
     var parentLi     = link.parent();
     var isOpen       = parentLi.hasClass(ClassName.open);
-// alert(1);
+
     if (!parentLi.is(Selector.treeview)) {
       return;
     }
-      // alert(2);
 
     if (!this.options.followLink || link.attr('href') === '#') {
       event.preventDefault();
     }
-      // alert(3);
 
     if (isOpen) {
       this.collapse(treeviewMenu, parentLi);
     } else {
       this.expand(treeviewMenu, parentLi);
     }
-      // alert(4);
   };
 
   Tree.prototype.expand = function (tree, parent) {

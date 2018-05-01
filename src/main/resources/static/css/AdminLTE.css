@@ -597,19 +597,19 @@ a:focus {
     -webkit-transform: translateZ(0);
   }
   .sidebar-mini.sidebar-collapse .main-header .logo {
-    width: 50px;
+    /*width: 50px;*/
   }
   .sidebar-mini.sidebar-collapse .main-header .logo > .logo-mini {
-    display: block;
-    margin-left: -15px;
-    margin-right: -15px;
-    font-size: 18px;
+    /*display: block;*/
+    /*margin-left: -15px;*/
+    /*margin-right: -15px;*/
+    /*font-size: 18px;*/
   }
   .sidebar-mini.sidebar-collapse .main-header .logo > .logo-lg {
-    display: none;
+    /*display: none;*/
   }
   .sidebar-mini.sidebar-collapse .main-header .navbar {
-    margin-left: 50px;
+    /*margin-left: 50px;*/
   }
 }
 .sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu > li:hover > a > span:not(.pull-right),

@@ -53,7 +53,7 @@
 
   <!-- Google Font fonts.googleapis.com changed to fonts.googleapis.cnpmjs.org-->
   <!--<link rel="stylesheet"-->
-        <!--href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">-->
+  <!--href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">-->
   <!--<script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>-->
   <!--<script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>-->
 
@@ -83,20 +83,10 @@
       <!-- 参考 top nav 的顶部菜单 Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">菜单</a></li>
-          <li><a href="#">菜单</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">下拉菜单 <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#" onclick="addTabs({id:'90011',title: '用户管理',close: true,url: './users',urlType: 'relative'});">用户管理</a></li>
-              <li><a href="#">菜单</a></li>
-              <li><a href="#">长菜单</a></li>
-              <li class="divider"></li>
-              <li><a href="#">分隔栏</a></li>
-              <li class="divider"></li>
-              <li><a href="#">分隔栏</a></li>
-            </ul>
-          </li>
+          <li th:classappend="${menu=='home' ? 'active' : ''}"><a href="../home.html" th:href="@{/}">首页</a></li>
+          <li th:classappend="${menu!='home' ? 'active' : ''}"><a href="../index2.html" th:href="@{/index2.html}">示例</a></li>
+          <li th:classappend="${submenu=='user' ? 'active' : ''}">
+            <a href="#" onclick="addTabs({id:'90011',title: '用户管理',close: true,url: './users',urlType: 'relative'});">用户管理</a></li>
         </ul>
         <form class="navbar-form navbar-left" role="search">
           <div class="input-group"><!--form-group-->
@@ -120,7 +110,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="../../static/img/yinguowei.jpg" th:src="@{/img/yinguowei.jpg}" class="user-image"
                    style="border-radius: 10%;" alt="User Image">
-              <span class="hidden-xs" th:text="${session.userFullName}">管理员</span>
+              <span class="hidden-xs" th:text="${#strings.isEmpty(session.userFullName) ? '管理员' : session.userFullName}">管理员</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -284,7 +274,7 @@
           <ul class="treeview-menu">
             <li>
               <a href="#" onclick="addTabs({id:'90031',title: 'H2 Console',close: true,url: './h2-console',urlType: 'relative'});">
-              <i class="fa fa-database"></i> H2 Console</a></li>
+                <i class="fa fa-database"></i> H2 Console</a></li>
             <li><a href="#" th:href="@{/docs}" target="_blank">
               <i class="fa fa-file-text-o"></i> Actuator Docs
               <span class="pull-right-container"><i class="fa fa-external-link"></i></span>
@@ -362,12 +352,12 @@
           href="https://www.wilmar.cn">Wilmar</a></strong>
   </footer>
 
-<!--  <footer>
-    <div th:replace="fragments/footer :: footer">&copy; 2016 blog.codeleak.pl</div>
-  </footer>
+  <!--  <footer>
+      <div th:replace="fragments/footer :: footer">&copy; 2016 blog.codeleak.pl</div>
+    </footer>
 
-  in footer.html <div th:fragment="footer">
-  -->
+    in footer.html <div th:fragment="footer">
+    -->
 
 
   <!-- Control Sidebar -->
@@ -434,10 +424,10 @@
 
 <script>
 
-/*    $youziku.load("body", "3291b04973ce47efa3ab4a555a5b5916", "Source-Han-Light");
-    /!*$youziku.load("#id1,.class1,h1", "3291b04973ce47efa3ab4a555a5b5916", "Source-Han-Light");*!/
-    /!*．．．*!/
-    $youziku.draw();*/
+  /*    $youziku.load("body", "3291b04973ce47efa3ab4a555a5b5916", "Source-Han-Light");
+   /!*$youziku.load("#id1,.class1,h1", "3291b04973ce47efa3ab4a555a5b5916", "Source-Han-Light");*!/
+   /!*．．．*!/
+   $youziku.draw();*/
 </script>
 
 <div layout:fragment="customScript" th:remove="tag">

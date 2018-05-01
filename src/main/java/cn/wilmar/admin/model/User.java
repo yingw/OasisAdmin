@@ -27,16 +27,16 @@ public class User extends AbstractAuditingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @NonNull @NotNull @NotEmpty @Column(unique = true)
+    @NonNull @NotEmpty @Column(unique = true)
     String username;
 
-    @NotNull @NotEmpty @NonNull
+    @NotEmpty @NonNull
     String fullname;
 
     @JsonIgnore
     String password;
 
-    @NonNull @NotEmpty @NotNull
+    @NonNull @NotEmpty
     String email;
 
     @Enumerated(EnumType.STRING)

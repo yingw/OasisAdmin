@@ -1,3 +1,5 @@
+${AnsiColor.MAGENTA}
+\/\/ | |_ |\/| /\ /?   /\ |) |\/| | |\|
 
-${AnsiColor.BRIGHT_BLUE}Font Name: ANSI Shadow
-Wilmar Admin :: https://admin.wilmar.cn :: Running Spring Boot ${spring-boot.version} :: ${AnsiColor.DEFAULT}
+${AnsiColor.BLUE}:: ${application.title} ::    ${application.version}
+${AnsiColor.GREEN}:: Spring Boot ::    ${spring-boot.version}

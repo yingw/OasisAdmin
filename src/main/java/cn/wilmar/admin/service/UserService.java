@@ -43,28 +43,24 @@ public class UserService {
 
     @Cacheable(value = USER_BY_ID_CACHE, key = "#id")
     @Transactional(readOnly = true)
-    public User getUserById(long id) {
-        System.out.println(">>>> UserService.getUserById");
-        System.out.println("id = " + id);
-        final User user = userRepository.findById(id).get();
-        System.out.println("UserService.getUserById <<<<");
-        return user;
+    public User getUserById(Long id) {
+        System.out.println(">>>> UserService.getUserById: id = " + id);
+        return userRepository.findById(id).orElse(null);
     }
 
     @Cacheable(cacheNames = USER_BY_LOGIN_CACHE, key = "#username")
     @Transactional(readOnly = true)
     public User getUserByUsername(String username) {
-        System.out.println("UserService.getUserByUsername");
-        System.out.println("username = " + username);
-        final User user = userRepository.findOneByUsername(username).get();
-        System.out.println("UserService.getUserByUsername");
-        return user;
+        System.out.println("UserService.getUserByUsername: username = " + username);
+        return userRepository.findOneByUsername(username).orElse(null);
     }
 
     //    @Cacheable
 //    @CacheEvict(allEntries = true)
+
+    // TODO : BUG
     @Caching(put = {@CachePut(key = "'id:' + #user.id"), @CachePut(key = "'username:' + #user.username")},
-            evict = {@CacheEvict("users")})
+            evict = {@CacheEvict(cacheNames = USERS_ALL_CACHE, allEntries = true)})
     public User createUser(User user) {
         // TODO: username PK
         System.out.println(">>>> UserService.createUser");
@@ -86,28 +82,35 @@ public class UserService {
         return user;
     }
 
-    public void deleteUser(long id) {
+    public void deleteUser(Long id) {
         System.out.println(">>>> UserService.deleteUser");
-        final Optional<User> user = userRepository.findById(id);
-        if (user.isPresent()) {
+        userRepository.findById(id).ifPresent(user -> {
             userRepository.deleteById(id);
-            cacheManager.getCache(USER_BY_ID_CACHE).evict(user.get().getId());
-            cacheManager.getCache(USER_BY_LOGIN_CACHE).evict(user.get().getUsername());
-            cacheManager.getCache(USERS_ALL_CACHE).clear();
-        } else {
-            logger.error("Not found");
-            // TODO: exception.
-        }
+            evictCache(user);
+        }); // TODO or exception.
         System.out.println("UserService.deleteUser <<<<");
     }
+
 
     public void setUserStatus(long id, boolean enable) {
         System.out.println("UserService.setUserStatus");
         final User user = getUserById(id);
         user.setActive(enable);
         updateUser(user);
+        updateCache(user);
+    }
+
+
+    private void updateCache(User user) {
         cacheManager.getCache(USER_BY_ID_CACHE).put(user.getId(), user);
         cacheManager.getCache(USER_BY_LOGIN_CACHE).put(user.getUsername(), user);
         cacheManager.getCache(USERS_ALL_CACHE).clear();
     }
+
+    private void evictCache(User user) {
+        cacheManager.getCache(USER_BY_ID_CACHE).evict(user.getId());
+        cacheManager.getCache(USER_BY_LOGIN_CACHE).evict(user.getUsername());
+        cacheManager.getCache(USERS_ALL_CACHE).clear();
+    }
+
 }

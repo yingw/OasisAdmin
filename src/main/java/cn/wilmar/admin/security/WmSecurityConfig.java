@@ -32,7 +32,8 @@ public class WmSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
                 .antMatchers("/api/**", "/example/**").permitAll()
                 .antMatchers("/css/**", "/js/**", "/img/**", "/bower_components/**", "/plugins/**", "/webjars/**").permitAll()
-                .antMatchers("/", "/index.html", "/register", "/welcome_iframe.html").permitAll()
+//                .antMatchers("/", "/index.html", "/register", "pages/welcome.html").permitAll()
+                .antMatchers("/register").permitAll()
                 // TODO: those manager tools's endpoint, need Toolkit Role
                 .antMatchers("/admin", "/h2-console/**", "/actuator/**", "/swagger-ui.html").permitAll()
                 .antMatchers("/users", "/users/**").authenticated()//.hasRole(DEFAULT_USER)

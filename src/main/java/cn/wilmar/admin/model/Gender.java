@@ -10,7 +10,7 @@ import java.util.Random;
  */
 
 public enum Gender {
-    MALE, FEMALE;
+    Male, Female;
 
     private static final List<Gender> VALUES = Collections.unmodifiableList(Arrays.asList(values()));
     private static final int SIZE = VALUES.size();

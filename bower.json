@@ -39,7 +39,7 @@
     "jquery": "^3.2.1",
     "datatables.net": "^1.10.15",
     "datatables.net-bs": "^2.1.1",
-    "bootstrap-datepicker": "https://github.com/uxsolutions/bootstrap-datepicker.git#^1.8.0",
+    "bootstrap-datepicker": "^1.8.0",
     "bootstrap-daterangepicker": "^2.1.25",
     "moment": "^2.18.1",
     "fastclick": "^1.0.6",
@@ -68,6 +68,7 @@
     "switchery": "^0.8.2"
   },
   "resolutions": {
+    "fastclick": "^1.0.6",
     "jquery": "^3.2.1"
   }
 }

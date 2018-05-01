@@ -23,10 +23,10 @@ public class WmErrorInterceptor implements HandlerInterceptor {
             return;
         }
         if (httpServletResponse.getStatus() == 500) {
-            modelAndView.setViewName("500");//pages/examples/
+            modelAndView.setViewName("pages/500");//pages/examples/
         }
         if (httpServletResponse.getStatus() == 404) {
-            modelAndView.setViewName("404");//pages/examples/
+            modelAndView.setViewName("pages/404");//pages/examples/
         }
     }
 

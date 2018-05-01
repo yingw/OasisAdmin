@@ -1,13 +1,13 @@
 {
-  "name": "Oasis Admin",
+  "name": "WilmarAdmin",
   "version": "1.0.0",
-  "description": "Oasis Admin application",
+  "description": "Wilmar Admin application",
   "dependencies": {
     "bower": "~1.8.4"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yingw/OasisAdmin.git"
+    "url": "git+https://github.com/yingw/WilmarAdmin.git"
   },
   "author": "yinguowei",
   "license": "MIT"

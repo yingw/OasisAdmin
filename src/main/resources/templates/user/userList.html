@@ -92,8 +92,8 @@
               <td th:text="${user.id}">1</td>
               <td><span th:text="${user.fullname}">姓名</span></td>
               <td>
-                <span class="label label-info" th:remove="${user.gender?.toString() == 'MALE'} ? 'none' : 'all'">男</span>
-                <span class="label" style="background-color: hotpink;" th:remove="${user.gender?.toString() == 'FEMALE'} ? 'none' : 'all'">女</span>
+                <span class="label label-info" th:remove="${user.gender?.toString() == 'Male'} ? 'none' : 'all'">男</span>
+                <span class="label" style="background-color: hotpink;" th:remove="${user.gender?.toString() == 'Female'} ? 'none' : 'all'">女</span>
               </td>
               <td th:text="${user.username}">username</td>
               <td th:text="${user.email}">user@email.com</td>

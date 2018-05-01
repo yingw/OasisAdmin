@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
     @RequestMapping("/login")
     public String login() {
-        return "login";
+        return "pages/login";
     }
 
     @RequestMapping("/login-error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
-        return "login";
+        return "pages/login";
     }
 
     @RequestMapping("/register")
     public String register() {
-        return "register";
+        return "pages/register";
     }
 }
